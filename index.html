@@ -5,61 +5,440 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REX RP | Инструкция по подключению</title>
     
-    <!-- Подключаем стили Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    
-    <!-- Шрифт Montserrat -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Font Awesome для иконок -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- СОБСТВЕННЫЙ CSS (ПРЯМАЯ ССЫЛКА НА GITHUB) -->
-    <link rel="stylesheet" href="https://raw.githubusercontent.com/REX-RP-54/RexRPSite/refs/heads/main/style.css">
+    <!-- Шрифт Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #0a0a12;
+            padding-top: 76px;
+        }
+        
+        .hero-section {
+            min-height: calc(100vh - 76px);
+            position: relative;
+            background: linear-gradient(135deg, rgba(10, 10, 18, 0.4) 0%, rgba(45, 26, 10, 0.5) 50%, rgba(10, 10, 18, 0.4) 100%);
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://github.com/REX-RP-54/RexRPSite/blob/main/Site.png?raw=true') center/cover no-repeat;
+            filter: blur(40px) brightness(0.7);
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* ===== ОРАНЖЕВЫЙ ГРАДИЕНТ ===== */
+        .text-gradient {
+            background: linear-gradient(135deg, #f97316, #ea580c, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* ===== КАРТОЧКИ С ПРОЗРАЧНОСТЬЮ (фон виден) ===== */
+        .glass-card {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(249, 115, 22, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(249, 115, 22, 0.4);
+            box-shadow: 0 20px 60px rgba(249, 115, 22, 0.12);
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        .resource-card {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(249, 115, 22, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #fff;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(249, 115, 22, 0.3);
+            box-shadow: 0 20px 60px rgba(249, 115, 22, 0.12);
+            color: #fff;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        .btn-glow {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-glow:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(249, 115, 22, 0.4);
+        }
+        
+        .btn-outline-glow {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-glow:hover {
+            background: rgba(249, 115, 22, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(249, 115, 22, 0.2);
+        }
+        
+        /* ===== НАВИГАЦИЯ ===== */
+        .navbar-glass {
+            background: rgba(10, 10, 18, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(249, 115, 22, 0.15);
+        }
+        
+        .nav-link-custom {
+            position: relative;
+            color: rgba(255, 255, 255, 0.6) !important;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            padding: 8px 20px !important;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        
+        .nav-link-custom::before {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #f97316, #f59e0b);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        .nav-link-custom:hover {
+            color: #fff !important;
+            background: rgba(249, 115, 22, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link-custom:hover::before {
+            width: 60%;
+        }
+        
+        .nav-link-custom.active {
+            color: #fff !important;
+            background: rgba(249, 115, 22, 0.15);
+        }
+        
+        .nav-link-custom.active::before {
+            width: 60%;
+        }
+        
+        .nav-link-custom i {
+            margin-right: 8px;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-link-custom:hover i {
+            opacity: 1;
+        }
+        
+        /* ===== БЭЙДЖИ ===== */
+        .step-badge {
+            background: rgba(249, 115, 22, 0.2);
+            color: #fb923c;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            border: 1px solid rgba(249, 115, 22, 0.15);
+        }
+        
+        .step-badge-accent {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+            border-color: rgba(251, 191, 36, 0.15);
+        }
+        
+        .step-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #f97316, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0.6;
+            line-height: 1;
+        }
+        
+        .step-number-accent {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .final-card {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(249, 115, 22, 0.2);
+            backdrop-filter: blur(8px);
+        }
+        
+        .final-badge {
+            background: rgba(249, 115, 22, 0.2);
+            color: #fb923c;
+            padding: 4px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .alert-glow-danger {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 12px;
+            backdrop-filter: blur(8px);
+        }
+        
+        .alert-glow-warning {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 12px;
+            backdrop-filter: blur(8px);
+        }
+        
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .icon-discord {
+            background: rgba(88, 101, 242, 0.2);
+            color: #818cf8;
+        }
+        
+        .icon-mvd {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            color: #fcd34d;
+            font-size: 0.75rem;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            word-break: break-all;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .anchor-offset {
+            scroll-margin-top: 80px;
+        }
+        
+        /* ===== ИКОНКИ ШАГОВ ===== */
+        .step-icon-wrapper {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+        
+        .step-icon-orange {
+            background: rgba(249, 115, 22, 0.15);
+            color: #fb923c;
+        }
+        
+        .step-icon-yellow {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+        }
+        
+        .step-icon-amber {
+            background: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+        }
+        
+        /* ===== ОРАНЖЕВЫЕ КНОПКИ ===== */
+        .btn-orange {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            border: none;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-orange:hover {
+            background: linear-gradient(135deg, #fb923c, #f97316);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(249, 115, 22, 0.4);
+            color: #fff;
+        }
+        
+        .btn-outline-orange {
+            border: 2px solid rgba(249, 115, 22, 0.5);
+            color: #fff;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-orange:hover {
+            background: rgba(249, 115, 22, 0.15);
+            border-color: #fb923c;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(249, 115, 22, 0.2);
+            color: #fff;
+        }
+        
+        .btn-outline-light-orange {
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            color: #fff;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-light-orange:hover {
+            background: rgba(249, 115, 22, 0.2);
+            border-color: #fb923c;
+            transform: translateY(-2px);
+            color: #fff;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a12;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #fb923c;
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .display-4 {
+                font-size: 2.5rem !important;
+            }
+            .step-number {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .display-4 {
+                font-size: 2rem !important;
+            }
+            .nav-link-custom {
+                font-size: 0.8rem;
+                padding: 6px 14px !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
     <!-- ===== НАВИГАЦИЯ ===== -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-glass">
         <div class="container">
-            <a class="navbar-brand logo" href="#">REX <span>RP</span></a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand fw-bold fs-2" href="#">
+                <span class="text-gradient">REX</span> <span class="text-white">RP</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav gap-1 gap-lg-2">
-                    <li class="nav-item"><a class="nav-link active" href="#about">О проекте</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#howto">Инструкция</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#links">Ресурсы</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom active" href="#about">
+                            <i class="fas fa-info-circle"></i> О проекте
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#howto">
+                            <i class="fas fa-play-circle"></i> Инструкция
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#links">
+                            <i class="fas fa-link"></i> Ресурсы
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- ===== HERO СЕКЦИЯ ===== -->
-    <section class="hero-section" id="about">
-        <div class="hero-bg-image"></div>
-        <div class="hero-gradient-overlay"></div>
-        <div class="container hero-content">
+    <!-- ===== HERO СЕКЦИЯ (ФОН ВИДЕН) ===== -->
+    <section class="hero-section d-flex align-items-center anchor-offset" id="about">
+        <div class="container hero-content py-5">
             <div class="row">
                 <div class="col-lg-8">
-                    <span class="hero-badge mb-3">
+                    <span class="badge bg-warning bg-opacity-20 text-warning border border-warning border-opacity-25 mb-3 py-2 px-3 rounded-pill">
                         <i class="fas fa-gamepad me-2"></i> База Radmir Online
                     </span>
-                    <h1 class="hero-title text-white mb-4">
-                        ДОБРО ПОЖАЛОВАТЬ <br>НА <span class="highlight">REX ROLEPLAY</span>
+                    <h1 class="display-3 fw-bold text-white mb-4">
+                        ДОБРО ПОЖАЛОВАТЬ <br>НА <span class="text-gradient">REX ROLEPLAY</span>
                     </h1>
-                    <p class="hero-subtitle mb-4">
+                    <p class="fs-5 text-white-50 mb-4" style="max-width: 600px; line-height: 1.8;">
                         REX RP — уникальный игровой сервер на платформе Radmir CRMP. 
                         Погрузись в проработанный мир криминальной и городской романтики СНГ. 
                         Настрой подключение за пару минут по нашей инструкции.
                     </p>
                     <div class="d-flex flex-wrap gap-3">
-                        <a href="#howto" class="btn-primary-glow">
-                            <i class="fas fa-download"></i> Начать установку
+                        <a href="#howto" class="btn btn-orange btn-lg btn-glow px-5 py-3 fw-bold text-uppercase">
+                            <i class="fas fa-download me-2"></i> Начать установку
                         </a>
-                        <a href="https://dsc.gg/rexrp" target="_blank" class="btn-outline-glow">
-                            <i class="fab fa-discord"></i> Наш Discord
+                        <a href="https://dsc.gg/rexrp" target="_blank" class="btn btn-outline-orange btn-lg btn-outline-glow px-5 py-3 fw-bold text-uppercase">
+                            <i class="fab fa-discord me-2"></i> Наш Discord
                         </a>
                     </div>
                 </div>
@@ -68,64 +447,84 @@
     </section>
 
     <!-- ===== ИНСТРУКЦИЯ ===== -->
-    <section class="py-5" id="howto" style="background: #0a0a12;">
+    <section class="py-5 anchor-offset" id="howto" style="background: rgba(10, 10, 18, 0.7); backdrop-filter: blur(10px);">
         <div class="container my-4">
             <div class="text-center mb-5">
                 <h2 class="section-title text-white">
-                    КАК ЗАЙТИ НА <span class="highlight">СЕРВЕР?</span>
+                    КАК ЗАЙТИ НА <span class="text-gradient">СЕРВЕР?</span>
                 </h2>
-                <p class="section-subtitle">Всего 7 шагов — и ты в игре!</p>
+                <p class="text-white-50 fs-5">Всего 3 простых шага — и ты в игре!</p>
             </div>
 
             <div class="row g-4">
-                <!-- Шаг 1-2 -->
+                <!-- ШАГ 1 -->
                 <div class="col-12 col-md-4">
-                    <div class="glass-card">
-                        <div class="d-flex justify-content-between align-items-start">
-                            <span class="step-number">01</span>
-                            <span class="step-badge">База</span>
+                    <div class="glass-card rounded-4 p-4 h-100">
+                        <div class="d-flex align-items-start gap-3">
+                            <div class="step-icon-wrapper step-icon-orange">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <span class="step-number">01</span>
+                                    <span class="step-badge">База</span>
+                                </div>
+                                <h5 class="fw-bold text-white mt-2">Установка Radmir</h5>
+                                <p class="text-white-50 small">Скачай официальный лаунчер Radmir Online и установи игру на ПК.</p>
+                                <a href="https://radmir.online/" target="_blank" class="btn btn-outline-light-orange btn-sm w-100 mt-2 py-2 fw-bold">
+                                    <i class="fas fa-download me-2"></i> Скачать лаунчер
+                                </a>
+                            </div>
                         </div>
-                        <h5 class="card-title">Установка Radmir</h5>
-                        <p class="card-text">Скачай официальный лаунчер Radmir Online по ссылке и полностью установи игру на ПК.</p>
-                        <a href="https://radmir.online/" target="_blank" class="btn-sm-glow mt-3">
-                            <i class="fas fa-download"></i> Скачать лаунчер
-                        </a>
                     </div>
                 </div>
 
-                <!-- Шаг 3-5 -->
+                <!-- ШАГ 2 -->
                 <div class="col-12 col-md-4">
-                    <div class="glass-card">
-                        <div class="d-flex justify-content-between align-items-start">
-                            <span class="step-number">02</span>
-                            <span class="step-badge" style="background: rgba(108, 60, 224, 0.2); color: var(--primary-light);">Файлы</span>
+                    <div class="glass-card rounded-4 p-4 h-100">
+                        <div class="d-flex align-items-start gap-3">
+                            <div class="step-icon-wrapper step-icon-yellow">
+                                <i class="fas fa-file-archive"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <span class="step-number step-number-accent">02</span>
+                                    <span class="step-badge step-badge-accent">Файлы</span>
+                                </div>
+                                <h5 class="fw-bold text-white mt-2">Подготовка коннекта</h5>
+                                <p class="text-white-50 small">Скачай <strong class="text-white">boconnect.zip</strong>, распакуй и нажми <strong class="text-white">«ЗАГРУЗИТЬ»</strong> в лаунчере.</p>
+                                <a href="https://github.com/REX-RP-54/RexRPSite/blob/main/boconnect.zip?raw=true" target="_blank" class="btn btn-outline-light-orange btn-sm w-100 mt-2 py-2 fw-bold">
+                                    <i class="fas fa-file-archive me-2"></i> Скачать boconnect.zip
+                                </a>
+                            </div>
                         </div>
-                        <h5 class="card-title">Подготовка коннекта</h5>
-                        <p class="card-text">Скачай архив <strong>boconnect.zip</strong> и распакуй в любое место. Нажми <strong>«ЗАГРУЗИТЬ»</strong> в лаунчере.</p>
-                        <!-- ССЫЛКА НА boconnect.zip ИСПРАВЛЕНА -->
-                        <a href="https://github.com/REX-RP-54/RexRPSite/blob/main/boconnect.zip?raw=true" target="_blank" class="btn-sm-glow mt-3">
-                            <i class="fas fa-file-archive"></i> Скачать boconnect.zip
-                        </a>
                     </div>
                 </div>
 
-                <!-- Шаг 6-7 -->
+                <!-- ШАГ 3 -->
                 <div class="col-12 col-md-4">
-                    <div class="glass-card" style="border-color: rgba(236, 72, 153, 0.2);">
-                        <div class="d-flex justify-content-between align-items-start">
-                            <span class="step-number" style="background: linear-gradient(135deg, var(--accent), #be185d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">03</span>
-                            <span class="step-badge" style="background: rgba(236, 72, 153, 0.15); color: var(--accent-light); border-color: rgba(236, 72, 153, 0.15);">Настройка</span>
+                    <div class="glass-card rounded-4 p-4 h-100" style="border-color: rgba(251, 191, 36, 0.2);">
+                        <div class="d-flex align-items-start gap-3">
+                            <div class="step-icon-wrapper step-icon-amber">
+                                <i class="fas fa-wrench"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <span class="step-number" style="background: linear-gradient(135deg, #f59e0b, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: 0.6;">03</span>
+                                    <span class="step-badge" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; border-color: rgba(245, 158, 11, 0.15);">Настройка</span>
+                                </div>
+                                <h5 class="fw-bold text-white mt-2">Установка файлов</h5>
+                                <p class="text-white-50 small">Перенеси файлы в папку с игрой:</p>
+                                <div class="code-block mb-2">C:\Program Files (x86)\RADMIR Games\RADMIR CRMP</div>
+                                <p class="text-white-50 small mb-0">Файлы: <span class="text-white fw-bold">server_connect.asi</span> и <span class="text-white fw-bold">server_connect.ini</span></p>
+                            </div>
                         </div>
-                        <h5 class="card-title">Установка файлов</h5>
-                        <p class="card-text">Открой папку с игрой:</p>
-                        <code class="d-block mb-3">C:\Program Files (x86)\RADMIR Games\RADMIR CRMP</code>
-                        <p class="card-text">Перенеси файлы <span class="text-white fw-bold">server_connect.asi</span> и <span class="text-white fw-bold">server_connect.ini</span> в эту папку.</p>
                     </div>
                 </div>
 
-                <!-- Финальный шаг -->
+                <!-- ФИНАЛ -->
                 <div class="col-12">
-                    <div class="final-card">
+                    <div class="final-card rounded-4 p-4">
                         <div class="row align-items-center">
                             <div class="col-md-9">
                                 <div class="d-flex align-items-center gap-2 flex-wrap mb-2">
@@ -134,13 +533,13 @@
                                     </span>
                                     <span class="text-white fw-bold fs-5">Вход на сервер</span>
                                 </div>
-                                <p class="text-muted mb-0" style="color: var(--text-muted) !important;">
-                                    В лаунчере выбери <span class="badge" style="background: rgba(239, 68, 68, 0.2); color: #f87171; padding: 4px 12px;">17 server</span> 
+                                <p class="text-white-50 mb-0">
+                                    В лаунчере выбери <span class="badge bg-danger bg-opacity-25 text-danger px-3 py-2">17 server</span> 
                                     и нажми <span class="text-white fw-bold">«ИГРАТЬ»</span>. При первом запуске укажи Email, придумай пароль и повтори его.
                                 </p>
                             </div>
                             <div class="col-md-3 text-md-end mt-3 mt-md-0">
-                                <span class="fs-2 fw-bold" style="background: linear-gradient(135deg, #34d399, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                                <span class="fs-1 fw-bold" style="background: linear-gradient(135deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
                                     🎮 Готово!
                                 </span>
                             </div>
@@ -152,19 +551,19 @@
             <!-- Блоки ВАЖНО -->
             <div class="row mt-4 g-3">
                 <div class="col-12 col-md-6">
-                    <div class="alert-glow alert-danger-glow">
-                        <h5 class="alert-title">
+                    <div class="alert-glow-danger p-4">
+                        <h5 class="fw-bold text-danger">
                             <i class="fas fa-triangle-exclamation me-2"></i> ВАЖНО ПРИ ЗАГРУЗКЕ!
                         </h5>
-                        <p class="alert-text">Когда идёт загрузка игры, <strong class="text-white">ни в коем случае не сворачивай окно</strong>. Дождись полного подключения, иначе клиент может зависнуть.</p>
+                        <p class="text-white-50 mb-0">Когда идёт загрузка игры, <strong class="text-white">ни в коем случае не сворачивай окно</strong>. Дождись полного подключения, иначе клиент может зависнуть.</p>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <div class="alert-glow alert-warning-glow">
-                        <h5 class="alert-title">
+                    <div class="alert-glow-warning p-4">
+                        <h5 class="fw-bold text-warning">
                             <i class="fas fa-rotate me-2"></i> ПОСЛЕ ОБНОВЛЕНИЙ
                         </h5>
-                        <p class="alert-text">После каждого обновления Radmir файлы подключения заменяются стандартными. Тебе нужно снова перенести файлы из архива в папку игры.</p>
+                        <p class="text-white-50 mb-0">После каждого обновления Radmir файлы подключения заменяются стандартными. Тебе нужно снова перенести файлы из архива в папку игры.</p>
                     </div>
                 </div>
             </div>
@@ -172,46 +571,42 @@
     </section>
 
     <!-- ===== РЕСУРСЫ ===== -->
-    <section class="py-5" id="links" style="background: #07070e;">
+    <section class="py-5 anchor-offset" id="links" style="background: rgba(7, 7, 14, 0.7); backdrop-filter: blur(10px);">
         <div class="container my-4">
             <div class="text-center mb-5">
                 <h2 class="section-title text-white">
-                    РЕСУРСЫ <span class="highlight">ПРОЕКТА</span>
+                    РЕСУРСЫ <span class="text-gradient">ПРОЕКТА</span>
                 </h2>
-                <p class="section-subtitle">Всё, что нужно для игры и общения</p>
+                <p class="text-white-50 fs-5">Всё, что нужно для игры и общения</p>
             </div>
 
             <div class="row g-4 justify-content-center">
-                <!-- Discord -->
                 <div class="col-12 col-md-6">
-                    <!-- ССЫЛКА НА ОСНОВНОЙ ДИСКОРД ИСПРАВЛЕНА -->
-                    <a href="https://dsc.gg/rexrp" target="_blank" class="resource-card">
+                    <a href="https://dsc.gg/rexrp" target="_blank" class="resource-card rounded-4 p-4 d-block">
                         <div class="d-flex align-items-center gap-3">
-                            <div class="resource-icon discord-icon">
+                            <div class="icon-box icon-discord">
                                 <i class="fab fa-discord"></i>
                             </div>
                             <div class="flex-grow-1">
-                                <h5 class="resource-title">Официальный Discord</h5>
-                                <p class="resource-desc">Общение с комьюнити, новости, техподдержка, отчёты и обзвоны на лидерство.</p>
+                                <h5 class="fw-bold text-white mb-1">Официальный Discord</h5>
+                                <p class="text-white-50 mb-0 small">Общение с комьюнити, новости, техподдержка, отчёты и обзвоны на лидерство.</p>
                             </div>
-                            <span class="resource-arrow">→</span>
+                            <span class="fs-2 text-white-50 opacity-50">→</span>
                         </div>
                     </a>
                 </div>
 
-                <!-- МВД -->
                 <div class="col-12 col-md-6">
-                    <!-- ССЫЛКА НА ДИСКОРД МВД ИСПРАВЛЕНА -->
-                    <a href="https://dsc.gg/rexrpmvd" target="_blank" class="resource-card">
+                    <a href="https://dsc.gg/rexrpmvd" target="_blank" class="resource-card rounded-4 p-4 d-block">
                         <div class="d-flex align-items-center gap-3">
-                            <div class="resource-icon mvd-icon">
+                            <div class="icon-box icon-mvd">
                                 <i class="fas fa-shield-halved"></i>
                             </div>
                             <div class="flex-grow-1">
-                                <h5 class="resource-title">Портал МВД (Полиция)</h5>
-                                <p class="resource-desc">Уставы, УК РФ, КоАП, ФЗоП, академия и отчётность для сотрудников фракции.</p>
+                                <h5 class="fw-bold text-white mb-1">Портал МВД (Полиция)</h5>
+                                <p class="text-white-50 mb-0 small">Уставы, УК РФ, КоАП, ФЗоП, академия и отчётность для сотрудников фракции.</p>
                             </div>
-                            <span class="resource-arrow">→</span>
+                            <span class="fs-2 text-white-50 opacity-50">→</span>
                         </div>
                     </a>
                 </div>
@@ -220,13 +615,59 @@
     </section>
 
     <!-- ===== ФУТЕР ===== -->
-    <footer class="custom-footer">
-        <div class="container text-center">
-            <p>&copy; 2026 REX RP. Сайт-инструкция игрового сервера на базе Radmir Online.</p>
+    <footer class="py-4 text-center border-top" style="background: rgba(10, 10, 18, 0.7); border-color: rgba(255,255,255,0.04) !important; backdrop-filter: blur(10px);">
+        <div class="container">
+            <p class="text-white-50 mb-0 small">&copy; 2026 REX RP. Сайт-инструкция игрового сервера на базе Radmir Online.</p>
         </div>
     </footer>
 
     <!-- ===== BOOTSTRAP JS ===== -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- ===== ПЛАВНАЯ ПРОКРУТКА ===== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        const navbarHeight = 76;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            const sections = document.querySelectorAll('.anchor-offset');
+            const navLinks = document.querySelectorAll('.nav-link-custom');
+
+            window.addEventListener('scroll', function() {
+                let current = '';
+                const scrollPosition = window.scrollY + 100;
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollPosition >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
