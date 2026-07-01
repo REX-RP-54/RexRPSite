@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REX RP | Инструкция по подключению</title>
+    
+    <!-- Подключаем стили Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <!-- Собственные стили кастомизации -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Шрифт Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Шапка сайта (Навигация) -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
+        <div class="container">
+            <a class="navbar-brand fw-black logo" href="#">REX <span>RP</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav gap-2">
+                    <li class="nav-item"><a class="nav-link" href="#about">О проекте</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#howto">Как начать играть</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#links">Ресурсы</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Главный экран / Описание -->
+    <section class="hero-section d-flex align-items-center" id="about">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content position-relative text-start">
+            <span class="badge custom-badge mb-3">База Radmir Online</span>
+            <h1 class="fw-black text-white display-4 mb-3">ДОБРО ПОЖАЛОВАТЬ НА <br><span class="text-primary-custom">REX ROLEPLAY</span></h1>
+            <p class="lead text-muted-custom mb-4">REX RP — это уникальный игровой сервер на платформе Radmir CRMP. Погрузись в проработанный мир криминальной и городской романтики СНГ. Ниже представлена подробная инструкция, которая поможет тебе настроить подключение за пару минут.</p>
+            <div class="d-flex flex-wrap gap-3">
+                <a href="#howto" class="btn btn-outline-light px-4 py-3 fw-bold text-uppercase">Начать установку</a>
+                <a href="https://discord.gg/YOUR_LINK" target="_blank" class="btn btn-outline-light px-4 py-3 fw-bold text-uppercase">Наш Discord</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Пошаговая инструкция -->
+    <section class="py-5" id="howto" style="background-color: #0f111a;">
+        <div class="container my-4">
+            <h2 class="text-center text-white mb-5 fw-black text-uppercase tracking-wide">Как зайти на сервер?</h2>
+            
+            <div class="row g-4">
+                <!-- Шаг 1 и 2 -->
+                <div class="col-12 col-md-4">
+                    <div class="card h-100 bg-dark text-white border-secondary-custom p-4 shadow-sm d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-primary-custom fw-bold mb-0">Шаг 1 - 2</h4>
+                            <span class="badge bg-secondary text-uppercase small">База</span>
+                        </div>
+                        <h5 class="card-title fw-bold mb-3 text-white">Установка Radmir</h5>
+                        <p class="card-text text-muted-custom small">Скачайте официальный лаунчер Radmir Online по ссылке и полностью установите игру на свой ПК.</p>
+                        <a href="https://radmir.online/" target="_blank" class="btn btn-outline-light btn-sm mt-auto w-100 py-2">Скачать лаунчер</a>
+                    </div>
+                </div>
+
+                <!-- Шаг 3, 4, 5 -->
+                <div class="col-12 col-md-4">
+                    <div class="card h-100 bg-dark text-white border-secondary-custom p-4 shadow-sm d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-primary-custom fw-bold mb-0">Шаг 3 - 5</h4>
+                            <span class="badge bg-primary text-uppercase small">Файлы</span>
+                        </div>
+                        <h5 class="card-title fw-bold mb-3 text-white">Подготовка коннекта</h5>
+                        <p class="card-text text-muted-custom small">Скачайте архив <b>boconnect.zip</b> и распакуйте его в любое удобное место. Затем обязательно нажмите кнопку <b>«ЗАГРУЗИТЬ»</b> в лаунчере Radmir.</p>
+                        <!-- Вставьте вместо # ссылку на ваш boconnect.zip -->
+                        <a href="#" class="btn btn-outline-light btn-sm mt-auto w-100 py-2 fw-bold">Скачать boconnect.zip</a>
+                    </div>
+                </div>
+
+                <!-- Шаг 6 и 7 -->
+                <div class="col-12 col-md-4">
+                    <div class="card h-100 bg-dark text-white border-primary-custom p-4 shadow-sm d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-success fw-bold mb-0">Шаг 6 - 7</h4>
+                            <span class="badge bg-success text-uppercase small">Настройка</span>
+                        </div>
+                        <h5 class="card-title fw-bold mb-2 text-white">Установка файлов</h5>
+                        <p class="card-text text-muted-custom small mb-2">Откройте папку с игрой по одному из путей:</p>
+                        <code class="d-block text-warning small bg-black p-2 rounded mb-3 text-break" style="font-size: 11px;">C:\Program Files (x86)\RADMIR Games\RADMIR CRMP</code>
+                        <p class="card-text text-muted-custom small">Перенесите файлы <span class="text-white fw-bold">server_connect.asi</span> и <span class="text-white fw-bold">server_connect.ini</span> в эту папку.</p>
+                    </div>
+                </div>
+
+                <!-- Шаг 8, 9, 10 -->
+                <div class="col-12">
+                    <div class="p-4 rounded-3 text-white border border-secondary-custom card-final">
+                        <div class="row align-items-center">
+                            <div class="col-md-9">
+                                <h5 class="fw-bold text-uppercase text-primary-custom mb-2">Финал: Вход на сервер</h5>
+                                <p class="mb-0 text-muted-custom">В лаунчере выбирайте <span class="badge bg-danger px-2 py-1">17 server</span> и нажимайте <span class="text-white fw-bold">«ИГРАТЬ»</span>. При первом запуске укажите свой Email, придумайте пароль и повторите его для завершения регистрации.</p>
+                            </div>
+                            <div class="col-md-3 text-md-end mt-3 mt-md-0">
+                                <span class="fs-3 fw-bold text-success">🎮 Готово!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Блок ВАЖНО -->
+            <div class="row mt-4 g-3">
+                <div class="col-12 col-md-6">
+                    <div class="alert alert-danger bg-danger bg-opacity-10 text-white border-danger h-100 p-4" role="alert">
+                        <h5 class="alert-heading fw-bold text-danger mb-2">⚠️ ВАЖНО ПРИ ЗАГРУЗКЕ!</h5>
+                        <p class="mb-0 small text-muted-custom">Когда идёт загрузка игры, <b>ни в коем случае не сворачивайте окно</b> (проверено лично). Дождитесь полного подключения, иначе клиент может намертво зависнуть.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="alert alert-warning bg-warning bg-opacity-10 text-white border-warning h-100 p-4" role="alert">
+                        <h5 class="alert-heading fw-bold text-warning mb-2">🔄 ПОСЛЕ ОБНОВЛЕНИЙ</h5>
+                        <p class="mb-0 small text-muted-custom">Обратите внимание: после каждого официального обновления Radmir файлы подключения заменяются дефолтными. Вам потребуется снова перенести файлы из архива в папку игры.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Важные ссылки (Дискорд и МВД) -->
+    <section class="py-5" id="links" style="background-color: #0b0c10;">
+        <div class="container my-4">
+            <h2 class="text-center text-white mb-5 fw-black text-uppercase tracking-wide">Ресурсы проекта</h2>
+            <div class="row g-4 justify-content-center">
+                
+                <!-- Дискорд -->
+                <div class="col-12 col-md-6">
+                    <a href="https://discord.gg/YOUR_LINK" target="_blank" class="text-decoration-none text-white d-block link-custom-card ds-bg p-4 h-100 rounded-3 border border-opacity-10 border-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3 class="fw-bold mb-2">Официальный Discord</h3>
+                                <p class="text-white-50 mb-0 small">Общение с комьюнити, новости, техническая поддержка, отчеты и обзвоны на лидерство.</p>
+                            </div>
+                            <span class="fs-2 ms-3 link-arrow">→</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- МВД -->
+                <div class="col-12 col-md-6">
+                    <a href="https://vk.com/your_mvd" target="_blank" class="text-decoration-none text-white d-block link-custom-card mvd-bg p-4 h-100 rounded-3 border border-opacity-10 border-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3 class="fw-bold mb-2">Портал МВД (Полиция)</h3>
+                                <p class="text-white-50 mb-0 small">Важнейшая информация для фракции: уставы, УК РФ, КоАП, ФЗоП, академия и отчетность сотрудников.</p>
+                            </div>
+                            <span class="fs-2 ms-3 link-arrow">→</span>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал сайта -->
+    <footer class="py-4 text-center text-white border-top border-secondary-custom" style="background-color: #0b0c10; font-size: 14px;">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 REX RP. Сайт-инструкция игрового сервера на базе Radmir Online.</p>
+        </div>
+    </footer>
+
+    <!-- Подключаем JavaScript Bootstrap 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
