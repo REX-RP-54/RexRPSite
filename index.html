@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REX RP | Инструкция по подключению</title>
     
+    <!-- ===== FAVICON ===== -->
+    <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/REX-RP-54/RexRPSite/refs/heads/main/Favicon.svg">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/REX-RP-54/RexRPSite/refs/heads/main/Favicon.svg">
+    
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
@@ -33,6 +37,34 @@
             background: #0a0a12;
             padding-top: 76px;
             overflow-x: hidden;
+            cursor: default;
+            position: relative;
+        }
+        
+        /* ===== ГЛОБАЛЬНЫЙ СВЕТ ЗА КУРСОРОМ (НА ВСЁМ САЙТЕ) ===== */
+        #globalGlow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(34, 138, 59, 0.12), rgba(46, 204, 113, 0.05), transparent 70%);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            mix-blend-mode: screen;
+            will-change: transform, left, top;
+        }
+        
+        #globalGlow.active {
+            opacity: 1;
+        }
+        
+        :root {
+            --primary: #228a3b;
+            --primary-light: #2ecc71;
+            --primary-dark: #1a6f2e;
         }
         
         /* ============================================================
@@ -44,6 +76,7 @@
             display: flex;
             align-items: center;
             background: rgba(10, 10, 18, 0.2);
+            overflow: hidden;
         }
         
         .hero-section::before {
@@ -59,6 +92,11 @@
             filter: blur(2px) brightness(0.85);
             z-index: 0;
             animation: heroFloat 25s ease-in-out infinite alternate;
+            transition: all 0.8s ease;
+        }
+        
+        .hero-section:hover::before {
+            filter: blur(2px) brightness(1.0);
         }
         
         @keyframes heroFloat {
@@ -74,6 +112,11 @@
             bottom: 0;
             background: linear-gradient(135deg, rgba(10, 10, 18, 0.3) 0%, transparent 50%, rgba(10, 10, 18, 0.2) 100%);
             z-index: 0;
+            transition: all 0.8s ease;
+        }
+        
+        .hero-section:hover .hero-overlay-light {
+            background: linear-gradient(135deg, rgba(10, 10, 18, 0.1) 0%, transparent 50%, rgba(10, 10, 18, 0.05) 100%);
         }
         
         .hero-content {
@@ -83,28 +126,22 @@
         }
         
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(60px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            from { opacity: 0; transform: translateY(60px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
         
         /* ============================================================
-           ГРАДИЕНТЫ
+           ТЕКСТ
            ============================================================ */
         .text-gradient {
-            background: linear-gradient(135deg, #f97316, #ea580c, #f59e0b);
+            background: linear-gradient(135deg, #228a3b, #2ecc71, #1a6f2e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
         .text-gradient-glow {
-            background: linear-gradient(135deg, #fb923c, #f97316, #f59e0b, #fb923c);
+            background: linear-gradient(135deg, #2ecc71, #228a3b, #2ecc71, #228a3b);
             background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -125,7 +162,7 @@
             background: rgba(0, 0, 0, 0.45);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(249, 115, 22, 0.1);
+            border: 1px solid rgba(34, 138, 59, 0.1);
             transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
             overflow: hidden;
@@ -142,7 +179,7 @@
             left: -100%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle at center, rgba(249, 115, 22, 0.06), transparent 70%);
+            background: radial-gradient(circle at center, rgba(34, 138, 59, 0.06), transparent 70%);
             transform: scale(0);
             transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
             pointer-events: none;
@@ -153,9 +190,9 @@
         }
         
         .glass-card:hover {
-            transform: translateY(-12px) scale(1.03);
-            border-color: rgba(249, 115, 22, 0.35);
-            box-shadow: 0 30px 80px rgba(249, 115, 22, 0.12);
+            transform: translateY(-12px) scale(1.05);
+            border-color: rgba(34, 138, 59, 0.35);
+            box-shadow: 0 30px 80px rgba(34, 138, 59, 0.15);
             background: rgba(0, 0, 0, 0.6);
         }
         
@@ -166,7 +203,7 @@
             background: rgba(0, 0, 0, 0.45);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(249, 115, 22, 0.08);
+            border: 1px solid rgba(34, 138, 59, 0.08);
             transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
             text-decoration: none;
             color: #fff;
@@ -180,7 +217,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(249, 115, 22, 0.05), transparent 60%);
+            background: linear-gradient(135deg, rgba(34, 138, 59, 0.05), transparent 60%);
             opacity: 0;
             transition: opacity 0.6s ease;
             border-radius: 20px;
@@ -191,9 +228,9 @@
         }
         
         .resource-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: rgba(249, 115, 22, 0.3);
-            box-shadow: 0 25px 60px rgba(249, 115, 22, 0.08);
+            transform: translateY(-8px) scale(1.04);
+            border-color: rgba(34, 138, 59, 0.3);
+            box-shadow: 0 25px 60px rgba(34, 138, 59, 0.1);
             color: #fff;
             background: rgba(0, 0, 0, 0.6);
         }
@@ -209,10 +246,10 @@
         }
         
         /* ============================================================
-           КНОПКИ — ВСЕ ЗАКРУГЛЕНЫ
+           КНОПКИ
            ============================================================ */
-        .btn-orange {
-            background: linear-gradient(135deg, #f97316, #ea580c);
+        .btn-green {
+            background: linear-gradient(135deg, #228a3b, #1a6f2e);
             border: none;
             color: #fff;
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
@@ -221,38 +258,38 @@
             border-radius: 50px !important;
         }
         
-        .btn-orange::before {
+        .btn-green::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, #fb923c, #f97316);
+            background: linear-gradient(135deg, #2ecc71, #228a3b);
             opacity: 0;
             transition: opacity 0.5s ease;
             border-radius: 50px;
         }
         
-        .btn-orange:hover::before {
+        .btn-green:hover::before {
             opacity: 1;
         }
         
-        .btn-orange span,
-        .btn-orange i {
+        .btn-green span,
+        .btn-green i {
             position: relative;
             z-index: 1;
         }
         
-        .btn-orange:hover {
-            transform: translateY(-4px) scale(1.04);
-            box-shadow: 0 20px 60px rgba(249, 115, 22, 0.35);
+        .btn-green:hover {
+            transform: translateY(-4px) scale(1.06);
+            box-shadow: 0 20px 60px rgba(34, 138, 59, 0.35);
             color: #fff;
         }
         
-        .btn-orange:active {
+        .btn-green:active {
             transform: scale(0.96);
         }
         
-        .btn-outline-orange {
-            border: 2px solid rgba(249, 115, 22, 0.4);
+        .btn-outline-green {
+            border: 2px solid rgba(34, 138, 59, 0.4);
             color: #fff;
             background: transparent;
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
@@ -261,42 +298,42 @@
             border-radius: 50px !important;
         }
         
-        .btn-outline-orange::before {
+        .btn-outline-green::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(249, 115, 22, 0.1);
+            background: rgba(34, 138, 59, 0.1);
             transform: scaleX(0);
             transform-origin: right;
             transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             border-radius: 50px;
         }
         
-        .btn-outline-orange:hover::before {
+        .btn-outline-green:hover::before {
             transform: scaleX(1);
             transform-origin: left;
         }
         
-        .btn-outline-orange:hover {
-            border-color: #fb923c;
-            transform: translateY(-4px) scale(1.04);
-            box-shadow: 0 20px 60px rgba(249, 115, 22, 0.15);
+        .btn-outline-green:hover {
+            border-color: #2ecc71;
+            transform: translateY(-4px) scale(1.06);
+            box-shadow: 0 20px 60px rgba(34, 138, 59, 0.15);
             color: #fff;
         }
         
-        .btn-outline-light-orange {
-            border: 1px solid rgba(249, 115, 22, 0.25);
+        .btn-outline-light-green {
+            border: 1px solid rgba(34, 138, 59, 0.25);
             color: #fff;
             background: transparent;
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             border-radius: 50px !important;
         }
         
-        .btn-outline-light-orange:hover {
-            background: rgba(249, 115, 22, 0.15);
-            border-color: #fb923c;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(249, 115, 22, 0.12);
+        .btn-outline-light-green:hover {
+            background: rgba(34, 138, 59, 0.15);
+            border-color: #2ecc71;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(34, 138, 59, 0.12);
             color: #fff;
         }
         
@@ -307,13 +344,13 @@
             background: rgba(10, 10, 18, 0.5);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border-bottom: 1px solid rgba(249, 115, 22, 0.05);
+            border-bottom: 1px solid rgba(34, 138, 59, 0.05);
             transition: all 0.5s ease;
         }
         
         .navbar-glass.scrolled {
             background: rgba(10, 10, 18, 0.7);
-            border-bottom-color: rgba(249, 115, 22, 0.1);
+            border-bottom-color: rgba(34, 138, 59, 0.1);
         }
         
         .nav-link-custom {
@@ -336,7 +373,7 @@
             transform: translateX(-50%) scaleX(0);
             width: 50%;
             height: 2px;
-            background: linear-gradient(90deg, #f97316, #f59e0b);
+            background: linear-gradient(90deg, #228a3b, #2ecc71);
             transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             border-radius: 2px;
         }
@@ -348,13 +385,13 @@
         
         .nav-link-custom:hover {
             color: #fff !important;
-            background: rgba(249, 115, 22, 0.06);
-            transform: translateY(-2px);
+            background: rgba(34, 138, 59, 0.06);
+            transform: translateY(-2px) scale(1.05);
         }
         
         .nav-link-custom.active {
             color: #fff !important;
-            background: rgba(249, 115, 22, 0.1);
+            background: rgba(34, 138, 59, 0.1);
         }
         
         .nav-link-custom i {
@@ -373,7 +410,7 @@
         .step-number {
             font-size: 3rem;
             font-weight: 900;
-            background: linear-gradient(135deg, #f97316, #f59e0b);
+            background: linear-gradient(135deg, #228a3b, #2ecc71);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -403,43 +440,44 @@
             transform: scale(1.12) rotate(-6deg);
         }
         
-        .step-icon-orange {
-            background: rgba(249, 115, 22, 0.15);
-            color: #fb923c;
+        .step-icon-green {
+            background: rgba(34, 138, 59, 0.15);
+            color: #2ecc71;
         }
-        .step-icon-yellow {
-            background: rgba(251, 191, 36, 0.15);
-            color: #fbbf24;
+        .step-icon-light {
+            background: rgba(46, 204, 113, 0.15);
+            color: #2ecc71;
         }
-        .step-icon-amber {
-            background: rgba(245, 158, 11, 0.15);
-            color: #f59e0b;
+        .step-icon-dark {
+            background: rgba(26, 111, 46, 0.15);
+            color: #228a3b;
         }
         
         .step-badge {
-            background: rgba(249, 115, 22, 0.15);
-            color: #fb923c;
+            background: rgba(34, 138, 59, 0.15);
+            color: #2ecc71;
             font-size: 0.65rem;
             font-weight: 700;
             padding: 4px 14px;
             border-radius: 50px !important;
             text-transform: uppercase;
-            border: 1px solid rgba(249, 115, 22, 0.08);
+            border: 1px solid rgba(34, 138, 59, 0.08);
             transition: all 0.4s ease;
             white-space: nowrap;
         }
         
         .glass-card:hover .step-badge {
-            background: rgba(249, 115, 22, 0.25);
-            color: #f97316;
+            background: rgba(34, 138, 59, 0.25);
+            color: #2ecc71;
+            transform: scale(1.06);
         }
         
         /* ============================================================
-           FINAL CARD
+           FINAL
            ============================================================ */
         .final-card {
             background: rgba(0, 0, 0, 0.45);
-            border: 1px solid rgba(249, 115, 22, 0.12);
+            border: 1px solid rgba(34, 138, 59, 0.12);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
@@ -447,19 +485,24 @@
         }
         
         .final-card:hover {
-            border-color: rgba(249, 115, 22, 0.3);
-            box-shadow: 0 20px 60px rgba(249, 115, 22, 0.06);
-            transform: scale(1.01);
+            border-color: rgba(34, 138, 59, 0.3);
+            box-shadow: 0 20px 60px rgba(34, 138, 59, 0.08);
+            transform: scale(1.03);
             background: rgba(0, 0, 0, 0.6);
         }
         
         .final-badge {
-            background: rgba(249, 115, 22, 0.15);
-            color: #fb923c;
+            background: rgba(34, 138, 59, 0.15);
+            color: #2ecc71;
             padding: 4px 16px;
             border-radius: 50px !important;
             font-size: 0.75rem;
             font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .final-card:hover .final-badge {
+            transform: scale(1.05);
         }
         
         /* ============================================================
@@ -477,7 +520,7 @@
         
         .alert-glow-danger:hover,
         .alert-glow-warning:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.03);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
         }
         
@@ -489,27 +532,42 @@
         }
         
         /* ============================================================
-           БЭЙДЖИ — ЗАКРУГЛЕНЫ
+           БЭЙДЖИ
            ============================================================ */
         .badge-server {
-            background: rgba(239, 68, 68, 0.2) !important;
-            color: #fca5a5 !important;
-            border: 1px solid rgba(239, 68, 68, 0.2);
+            background: rgba(34, 138, 59, 0.2) !important;
+            color: #2ecc71 !important;
+            border: 1px solid rgba(34, 138, 59, 0.2);
             padding: 6px 16px;
             font-weight: 700;
             font-size: 0.85rem;
             border-radius: 50px !important;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            display: inline-block;
+        }
+        
+        .badge-server:hover {
+            transform: scale(1.08);
+            background: rgba(34, 138, 59, 0.3) !important;
+            box-shadow: 0 8px 30px rgba(34, 138, 59, 0.2);
         }
         
         .badge-base {
-            background: rgba(249, 115, 22, 0.2) !important;
-            color: #fb923c !important;
-            border: 1px solid rgba(249, 115, 22, 0.15);
+            background: rgba(34, 138, 59, 0.2) !important;
+            color: #2ecc71 !important;
+            border: 1px solid rgba(34, 138, 59, 0.15);
             padding: 8px 20px;
             font-weight: 600;
             font-size: 0.85rem;
             letter-spacing: 0.5px;
             border-radius: 50px !important;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            display: inline-block;
+        }
+        
+        .badge-base:hover {
+            transform: scale(1.05);
+            background: rgba(34, 138, 59, 0.3) !important;
         }
         
         /* ============================================================
@@ -552,11 +610,12 @@
         }
         
         .glass-card:hover .code-block {
-            border-color: rgba(249, 115, 22, 0.15);
+            border-color: rgba(34, 138, 59, 0.15);
+            transform: scale(1.02);
         }
         
         /* ============================================================
-           СЕКЦИИ
+           ОБЩЕЕ
            ============================================================ */
         .section-title {
             font-size: 2.8rem;
@@ -569,9 +628,6 @@
             scroll-margin-top: 80px;
         }
         
-        /* ============================================================
-           СКРОЛЛБАР
-           ============================================================ */
         ::-webkit-scrollbar {
             width: 5px;
         }
@@ -579,78 +635,56 @@
             background: #0a0a12;
         }
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #f97316, #f59e0b);
+            background: linear-gradient(180deg, #228a3b, #2ecc71);
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #fb923c, #fbbf24);
+            background: linear-gradient(180deg, #2ecc71, #228a3b);
         }
         
         /* ============================================================
            RESPONSIVE
            ============================================================ */
         @media (max-width: 992px) {
-            .section-title {
-                font-size: 2.2rem;
-            }
+            .section-title { font-size: 2.2rem; }
+            #globalGlow { width: 400px; height: 400px; }
         }
         
         @media (max-width: 768px) {
-            .section-title {
-                font-size: 1.8rem;
-                letter-spacing: 1px;
-            }
-            .display-3 {
-                font-size: 2.5rem !important;
-            }
-            .step-number {
-                font-size: 2.2rem;
-            }
-            .hero-section::before {
-                filter: blur(4px) brightness(0.8);
-            }
-            .glass-card {
-                padding: 20px !important;
-            }
+            .section-title { font-size: 1.8rem; letter-spacing: 1px; }
+            .display-3 { font-size: 2.5rem !important; }
+            .step-number { font-size: 2.2rem; }
+            .hero-section::before { filter: blur(4px) brightness(0.8); }
+            .glass-card { padding: 20px !important; }
+            #globalGlow { width: 300px; height: 300px; }
         }
         
         @media (max-width: 576px) {
-            .display-3 {
-                font-size: 2rem !important;
-            }
+            .display-3 { font-size: 2rem !important; }
             .nav-link-custom {
                 font-size: 0.75rem;
                 padding: 6px 12px !important;
                 letter-spacing: 0.3px;
             }
-            .btn-orange,
-            .btn-outline-orange {
+            .btn-green,
+            .btn-outline-green {
                 width: 100%;
                 justify-content: center;
             }
-            .d-flex.flex-wrap.gap-3 {
-                flex-direction: column;
-            }
-            .hero-section::before {
-                filter: blur(6px) brightness(0.75);
-            }
-            .step-icon-wrapper {
-                width: 48px;
-                height: 48px;
-                font-size: 1.3rem;
-            }
-            .step-number {
-                font-size: 1.8rem;
-            }
+            .d-flex.flex-wrap.gap-3 { flex-direction: column; }
+            .hero-section::before { filter: blur(6px) brightness(0.75); }
+            .step-icon-wrapper { width: 48px; height: 48px; font-size: 1.3rem; }
+            .step-number { font-size: 1.8rem; }
             .badge-server,
-            .badge-base {
-                font-size: 0.7rem;
-                padding: 4px 12px;
-            }
+            .badge-base { font-size: 0.7rem; padding: 4px 12px; }
+            #globalGlow { width: 200px; height: 200px; opacity: 0.6; }
         }
     </style>
 </head>
 <body>
+
+    <!-- ===== ГЛОБАЛЬНЫЙ СВЕТ ЗА КУРСОРОМ ===== -->
+    <div id="globalGlow"></div>
 
     <!-- ===== НАВИГАЦИЯ ===== -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-glass" id="mainNav">
@@ -663,21 +697,9 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav gap-1 gap-lg-2">
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-custom active" href="#about">
-                            <i class="fas fa-info-circle"></i> О проекте
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="#howto">
-                            <i class="fas fa-play-circle"></i> Инструкция
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="#links">
-                            <i class="fas fa-link"></i> Ресурсы
-                        </a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom active" href="#about"><i class="fas fa-info-circle"></i> О проекте</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#howto"><i class="fas fa-play-circle"></i> Инструкция</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#links"><i class="fas fa-link"></i> Ресурсы</a></li>
                 </ul>
             </div>
         </div>
@@ -689,24 +711,12 @@
         <div class="container hero-content py-5">
             <div class="row">
                 <div class="col-lg-8">
-                    <span class="badge-base mb-3 d-inline-block">
-                        <i class="fas fa-gamepad me-2"></i> База Radmir Online
-                    </span>
-                    <h1 class="display-3 fw-bold text-white mb-4">
-                        ДОБРО ПОЖАЛОВАТЬ <br>НА <span class="text-gradient-glow">REX ROLEPLAY</span>
-                    </h1>
-                    <p class="fs-5 text-white-50 mb-4" style="max-width: 600px; line-height: 1.8;">
-                        REX RP — уникальный игровой сервер на платформе Radmir CRMP. 
-                        Погрузись в проработанный мир криминальной и городской романтики СНГ. 
-                        Настрой подключение за пару минут по нашей инструкции.
-                    </p>
+                    <span class="badge-base mb-3 d-inline-block"><i class="fas fa-gamepad me-2"></i> База Radmir Online</span>
+                    <h1 class="display-3 fw-bold text-white mb-4">ДОБРО ПОЖАЛОВАТЬ <br>НА <span class="text-gradient-glow">REX ROLEPLAY</span></h1>
+                    <p class="fs-5 text-white-50 mb-4" style="max-width: 600px; line-height: 1.8;">REX RP — уникальный игровой сервер на платформе Radmir CRMP. Погрузись в проработанный мир криминальной и городской романтики СНГ. Настрой подключение за пару минут по нашей инструкции.</p>
                     <div class="d-flex flex-wrap gap-3">
-                        <a href="#howto" class="btn btn-orange btn-lg px-5 py-3 fw-bold text-uppercase">
-                            <i class="fas fa-download me-2"></i> <span>Начать установку</span>
-                        </a>
-                        <a href="https://dsc.gg/rexrp" target="_blank" class="btn btn-outline-orange btn-lg px-5 py-3 fw-bold text-uppercase">
-                            <i class="fab fa-discord me-2"></i> Наш Discord
-                        </a>
+                        <a href="#howto" class="btn btn-green btn-lg px-5 py-3 fw-bold text-uppercase"><i class="fas fa-download me-2"></i> <span>Начать установку</span></a>
+                        <a href="https://dsc.gg/rexrp" target="_blank" class="btn btn-outline-green btn-lg px-5 py-3 fw-bold text-uppercase"><i class="fab fa-discord me-2"></i> Наш Discord</a>
                     </div>
                 </div>
             </div>
@@ -717,9 +727,7 @@
     <section class="py-5 anchor-offset" id="howto" style="background: rgba(10, 10, 18, 0.4); backdrop-filter: blur(10px);">
         <div class="container my-4">
             <div class="text-center mb-5">
-                <h2 class="section-title text-white">
-                    КАК ЗАЙТИ НА <span class="text-gradient">СЕРВЕР?</span>
-                </h2>
+                <h2 class="section-title text-white">КАК ЗАЙТИ НА <span class="text-gradient">СЕРВЕР?</span></h2>
                 <p class="text-white-50 fs-5">Всего 3 простых шага — и ты в игре!</p>
             </div>
 
@@ -728,9 +736,7 @@
                 <div class="col-12 col-md-4">
                     <div class="glass-card rounded-4 p-4">
                         <div class="d-flex align-items-start gap-3">
-                            <div class="step-icon-wrapper step-icon-orange flex-shrink-0">
-                                <i class="fas fa-download"></i>
-                            </div>
+                            <div class="step-icon-wrapper step-icon-green flex-shrink-0"><i class="fas fa-download"></i></div>
                             <div class="flex-grow-1 min-width-0">
                                 <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
                                     <span class="step-number">01</span>
@@ -739,9 +745,7 @@
                                 <h5 class="fw-bold text-white mt-2">Установка Radmir</h5>
                                 <p class="text-white-50 small">Скачай официальный лаунчер Radmir Online и установи игру на ПК.</p>
                                 <div class="mt-auto pt-2">
-                                    <a href="https://radmir.online/" target="_blank" class="btn btn-outline-light-orange btn-sm w-100 py-2 fw-bold">
-                                        <i class="fas fa-download me-2"></i> Скачать лаунчер
-                                    </a>
+                                    <a href="https://radmir.online/" target="_blank" class="btn btn-outline-light-green btn-sm w-100 py-2 fw-bold"><i class="fas fa-download me-2"></i> Скачать лаунчер</a>
                                 </div>
                             </div>
                         </div>
@@ -752,20 +756,16 @@
                 <div class="col-12 col-md-4">
                     <div class="glass-card rounded-4 p-4">
                         <div class="d-flex align-items-start gap-3">
-                            <div class="step-icon-wrapper step-icon-yellow flex-shrink-0">
-                                <i class="fas fa-file-archive"></i>
-                            </div>
+                            <div class="step-icon-wrapper step-icon-light flex-shrink-0"><i class="fas fa-file-archive"></i></div>
                             <div class="flex-grow-1 min-width-0">
                                 <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
-                                    <span class="step-number" style="background: linear-gradient(135deg, #f59e0b, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: 0.4;">02</span>
-                                    <span class="step-badge" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border-color: rgba(251, 191, 36, 0.08);">Файлы</span>
+                                    <span class="step-number" style="background: linear-gradient(135deg, #2ecc71, #228a3b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: 0.4;">02</span>
+                                    <span class="step-badge" style="background: rgba(46, 204, 113, 0.15); color: #2ecc71; border-color: rgba(46, 204, 113, 0.08);">Файлы</span>
                                 </div>
                                 <h5 class="fw-bold text-white mt-2">Подготовка коннекта</h5>
                                 <p class="text-white-50 small">Скачай <strong class="text-white">boconnect.zip</strong>, распакуй и нажми <strong class="text-white">«ЗАГРУЗИТЬ»</strong> в лаунчере.</p>
                                 <div class="mt-auto pt-2">
-                                    <a href="https://github.com/REX-RP-54/RexRPSite/blob/main/boconnect.zip?raw=true" target="_blank" class="btn btn-outline-light-orange btn-sm w-100 py-2 fw-bold">
-                                        <i class="fas fa-file-archive me-2"></i> Скачать boconnect.zip
-                                    </a>
+                                    <a href="https://github.com/REX-RP-54/RexRPSite/blob/main/boconnect.zip?raw=true" target="_blank" class="btn btn-outline-light-green btn-sm w-100 py-2 fw-bold"><i class="fas fa-file-archive me-2"></i> Скачать boconnect.zip</a>
                                 </div>
                             </div>
                         </div>
@@ -774,15 +774,13 @@
 
                 <!-- ШАГ 3 -->
                 <div class="col-12 col-md-4">
-                    <div class="glass-card rounded-4 p-4" style="border-color: rgba(251, 191, 36, 0.1);">
+                    <div class="glass-card rounded-4 p-4" style="border-color: rgba(46, 204, 113, 0.1);">
                         <div class="d-flex align-items-start gap-3">
-                            <div class="step-icon-wrapper step-icon-amber flex-shrink-0">
-                                <i class="fas fa-wrench"></i>
-                            </div>
+                            <div class="step-icon-wrapper step-icon-dark flex-shrink-0"><i class="fas fa-wrench"></i></div>
                             <div class="flex-grow-1 min-width-0">
                                 <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
-                                    <span class="step-number" style="background: linear-gradient(135deg, #f59e0b, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: 0.4;">03</span>
-                                    <span class="step-badge" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; border-color: rgba(245, 158, 11, 0.08);">Настройка</span>
+                                    <span class="step-number" style="background: linear-gradient(135deg, #228a3b, #1a6f2e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: 0.4;">03</span>
+                                    <span class="step-badge" style="background: rgba(26, 111, 46, 0.15); color: #228a3b; border-color: rgba(26, 111, 46, 0.08);">Настройка</span>
                                 </div>
                                 <h5 class="fw-bold text-white mt-2">Установка файлов</h5>
                                 <p class="text-white-50 small">Перенеси файлы в папку с игрой:</p>
@@ -799,21 +797,13 @@
                         <div class="row align-items-center">
                             <div class="col-md-9">
                                 <div class="d-flex align-items-center gap-2 flex-wrap mb-2">
-                                    <span class="final-badge">
-                                        <i class="fas fa-flag-checkered me-1"></i> ФИНАЛ
-                                    </span>
+                                    <span class="final-badge"><i class="fas fa-flag-checkered me-1"></i> ФИНАЛ</span>
                                     <span class="text-white fw-bold fs-5">Вход на сервер</span>
                                 </div>
-                                <p class="text-white-50 mb-0">
-                                    В лаунчере выбери 
-                                    <span class="badge-server">17 сервер</span> 
-                                    и нажми <span class="text-white fw-bold">«ИГРАТЬ»</span>. При первом запуске укажи Email, придумай пароль и повтори его.
-                                </p>
+                                <p class="text-white-50 mb-0">В лаунчере выбери <span class="badge-server">17 сервер</span> и нажми <span class="text-white fw-bold">«ИГРАТЬ»</span>. При первом запуске укажи Email, придумай пароль и повтори его.</p>
                             </div>
                             <div class="col-md-3 text-md-end mt-3 mt-md-0">
-                                <span class="fs-1 fw-bold" style="background: linear-gradient(135deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-                                    🎮 Готово!
-                                </span>
+                                <span class="fs-1 fw-bold" style="background: linear-gradient(135deg, #2ecc71, #228a3b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🎮 Готово!</span>
                             </div>
                         </div>
                     </div>
@@ -824,17 +814,13 @@
             <div class="row mt-4 g-3">
                 <div class="col-12 col-md-6">
                     <div class="alert-glow-danger p-4">
-                        <h5 class="fw-bold text-danger">
-                            <i class="fas fa-triangle-exclamation me-2"></i> ВАЖНО ПРИ ЗАГРУЗКЕ!
-                        </h5>
+                        <h5 class="fw-bold text-danger"><i class="fas fa-triangle-exclamation me-2"></i> ВАЖНО ПРИ ЗАГРУЗКЕ!</h5>
                         <p class="text-white-50 mb-0">Когда идёт загрузка игры, <strong class="text-white">ни в коем случае не сворачивай окно</strong>. Дождись полного подключения, иначе клиент может зависнуть.</p>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="alert-glow-warning p-4">
-                        <h5 class="fw-bold text-warning">
-                            <i class="fas fa-rotate me-2"></i> ПОСЛЕ ОБНОВЛЕНИЙ
-                        </h5>
+                        <h5 class="fw-bold text-warning"><i class="fas fa-rotate me-2"></i> ПОСЛЕ ОБНОВЛЕНИЙ</h5>
                         <p class="text-white-50 mb-0">После каждого обновления Radmir файлы подключения заменяются стандартными. Тебе нужно снова перенести файлы из архива в папку игры.</p>
                     </div>
                 </div>
@@ -846,19 +832,14 @@
     <section class="py-5 anchor-offset" id="links" style="background: rgba(7, 7, 14, 0.4); backdrop-filter: blur(10px);">
         <div class="container my-4">
             <div class="text-center mb-5">
-                <h2 class="section-title text-white">
-                    РЕСУРСЫ <span class="text-gradient">ПРОЕКТА</span>
-                </h2>
+                <h2 class="section-title text-white">РЕСУРСЫ <span class="text-gradient">ПРОЕКТА</span></h2>
                 <p class="text-white-50 fs-5">Всё, что нужно для игры и общения</p>
             </div>
-
             <div class="row g-4 justify-content-center">
                 <div class="col-12 col-md-6">
                     <a href="https://dsc.gg/rexrp" target="_blank" class="resource-card rounded-4 p-4">
                         <div class="d-flex align-items-center gap-3">
-                            <div class="icon-box icon-discord flex-shrink-0">
-                                <i class="fab fa-discord"></i>
-                            </div>
+                            <div class="icon-box icon-discord flex-shrink-0"><i class="fab fa-discord"></i></div>
                             <div class="flex-grow-1 min-width-0">
                                 <h5 class="fw-bold text-white mb-1">Официальный Discord</h5>
                                 <p class="text-white-50 mb-0 small">Общение с комьюнити, новости, техподдержка, отчёты и обзвоны на лидерство.</p>
@@ -867,13 +848,10 @@
                         </div>
                     </a>
                 </div>
-
                 <div class="col-12 col-md-6">
                     <a href="https://dsc.gg/rexrpmvd" target="_blank" class="resource-card rounded-4 p-4">
                         <div class="d-flex align-items-center gap-3">
-                            <div class="icon-box icon-mvd flex-shrink-0">
-                                <i class="fas fa-shield-halved"></i>
-                            </div>
+                            <div class="icon-box icon-mvd flex-shrink-0"><i class="fas fa-shield-halved"></i></div>
                             <div class="flex-grow-1 min-width-0">
                                 <h5 class="fw-bold text-white mb-1">Портал МВД (Полиция)</h5>
                                 <p class="text-white-50 mb-0 small">Уставы, УК РФ, КоАП, ФЗоП, академия и отчётность для сотрудников фракции.</p>
@@ -888,32 +866,40 @@
 
     <!-- ===== ФУТЕР ===== -->
     <footer class="py-4 text-center border-top" style="background: rgba(10, 10, 18, 0.4); border-color: rgba(255,255,255,0.03) !important; backdrop-filter: blur(10px);">
-        <div class="container">
-            <p class="text-white-50 mb-0 small">&copy; 2026 REX RP. Сайт-инструкция игрового сервера на базе Radmir Online.</p>
-        </div>
+        <div class="container"><p class="text-white-50 mb-0 small">&copy; 2026 REX RP. Сайт-инструкция игрового сервера на базе Radmir Online.</p></div>
     </footer>
 
-    <!-- ===== BOOTSTRAP JS ===== -->
+    <!-- ===== JS ===== -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // ===== ГЛОБАЛЬНЫЙ СВЕТ ЗА КУРСОРОМ =====
+            const glow = document.getElementById('globalGlow');
+            
+            document.addEventListener('mousemove', function(e) {
+                const x = e.clientX;
+                const y = e.clientY;
+                glow.style.left = x + 'px';
+                glow.style.top = y + 'px';
+                glow.classList.add('active');
+            });
+            
+            document.addEventListener('mouseleave', function() {
+                glow.classList.remove('active');
+            });
+
             // ===== ПЛАВНАЯ ПРОКРУТКА =====
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     const targetId = this.getAttribute('href');
                     if (targetId === '#') return;
-                    
                     const target = document.querySelector(targetId);
                     if (target) {
                         e.preventDefault();
                         const navbarHeight = 76;
                         const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
-                        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
+                        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
                     }
                 });
             });
@@ -921,31 +907,20 @@
             // ===== ПОДСВЕТКА АКТИВНОЙ ССЫЛКИ =====
             const sections = document.querySelectorAll('.anchor-offset');
             const navLinks = document.querySelectorAll('.nav-link-custom');
-
             window.addEventListener('scroll', function() {
                 let current = '';
                 const scrollPosition = window.scrollY + 120;
-
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
-                    if (scrollPosition >= sectionTop) {
-                        current = section.getAttribute('id');
-                    }
+                    if (scrollPosition >= sectionTop) current = section.getAttribute('id');
                 });
-
                 navLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (link.getAttribute('href') === '#' + current) {
-                        link.classList.add('active');
-                    }
+                    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
                 });
-
                 const navbar = document.getElementById('mainNav');
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
+                if (window.scrollY > 50) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
             });
 
             // ===== ПЛАВНОЕ ПОЯВЛЕНИЕ =====
@@ -958,7 +933,6 @@
                     }
                 });
             }, { threshold: 0.05, rootMargin: '0px 0px -50px 0px' });
-
             elements.forEach((el, index) => {
                 el.style.opacity = '0';
                 el.style.transform = 'translateY(40px)';
@@ -966,7 +940,6 @@
                 el.style.transitionDelay = (index * 60) + 'ms';
                 observer.observe(el);
             });
-
             setTimeout(() => {
                 elements.forEach((el, index) => {
                     setTimeout(() => {
