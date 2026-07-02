@@ -5,47 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REX RP | Инструкция по подключению</title>
     
-    <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/REX-RP-54/RexRPSite/refs/heads/main/Favicon.svg">
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/REX-RP-54/RexRPSite/refs/heads/main/Favicon.svg">
     
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Шрифт Montserrat -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Шрифт Geologica -->
+    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap" rel="stylesheet">
     
     <style>
-        /* ===== БАЗА ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Geologica', sans-serif;
             background: #0a0a12;
             padding-top: 76px;
             overflow-x: hidden;
             cursor: default;
-            position: relative;
             color: #fff;
         }
-        
         :root {
             --primary: #228a3b;
             --primary-light: #2ecc71;
             --primary-dark: #1a6f2e;
         }
         
-        /* ===== ПРЕЛОАДЕР ===== */
+        /* ПРЕЛОАДЕР */
         #preloader {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             background: #0a0a12;
             display: flex;
             align-items: center;
@@ -54,10 +43,9 @@
             transition: opacity 0.8s ease, visibility 0.8s ease;
         }
         #preloader.hidden { opacity: 0; visibility: hidden; }
-        
         .preloader-content { text-align: center; }
         .preloader-logo {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Geologica', sans-serif;
             font-size: 3.5rem;
             font-weight: 900;
             letter-spacing: 3px;
@@ -79,7 +67,6 @@
             from { opacity: 0; transform: scale(0.8); }
             to { opacity: 1; transform: scale(1); }
         }
-        
         .preloader-particles-container {
             width: 120px;
             height: 120px;
@@ -102,66 +89,59 @@
         .preloader-particle:nth-child(5) { top: 75%; left: 15%; animation-delay: 0.8s; }
         .preloader-particle:nth-child(6) { top: 25%; left: 15%; animation-delay: 1s; }
         .preloader-particle:nth-child(7) { top: 50%; left: 50%; animation-delay: 0.3s; width: 12px; height: 12px; background: #228a3b; }
-        
         @keyframes particleFloat {
             0%, 100% { transform: translate(0, 0) scale(1); }
             50% { transform: translate(0, -20px) scale(1.3); }
         }
         .preloader-text {
-            color: rgba(255, 255, 255, 0.3);
-            font-family: 'Montserrat', sans-serif;
+            color: rgba(255,255,255,0.3);
+            font-family: 'Geologica', sans-serif;
             font-size: 0.8rem;
             letter-spacing: 3px;
             text-transform: uppercase;
         }
         
-        /* ===== СВЕТ ЗА КУРСОРОМ ===== */
+        /* СВЕТ ЗА КУРСОРОМ */
         #globalGlow {
             position: fixed;
             width: 600px;
             height: 600px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(34, 138, 59, 0.12), rgba(46, 204, 113, 0.05), transparent 70%);
+            background: radial-gradient(circle, rgba(34,138,59,0.12), rgba(46,204,113,0.05), transparent 70%);
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
             opacity: 0;
             transition: opacity 0.4s ease;
             mix-blend-mode: screen;
-            will-change: transform, left, top;
         }
         #globalGlow.active { opacity: 1; }
         
-        /* ===== ЧАСТИЦЫ ===== */
+        /* ЧАСТИЦЫ */
         #particlesCanvas {
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
             z-index: 0;
             pointer-events: none;
         }
         
-        /* ===== HERO ===== */
+        /* ГЛАВНЫЙ ЭКРАН */
         .hero-section {
             min-height: calc(100vh - 76px);
             position: relative;
             display: flex;
             align-items: center;
-            background: rgba(10, 10, 18, 0.2);
+            background: rgba(10,10,18,0.2);
             overflow: hidden;
             z-index: 1;
         }
         .hero-section::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(ellipse at 30% 50%, rgba(10, 10, 18, 0.2) 0%, rgba(10, 10, 18, 0.5) 100%),
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(10,10,18,0.2) 0%, rgba(10,10,18,0.5) 100%),
                 url('https://raw.githubusercontent.com/REX-RP-54/RexRPSite/main/Site.png') center/cover no-repeat;
             filter: blur(2px) brightness(0.85);
             z-index: 0;
@@ -175,28 +155,25 @@
         }
         .hero-overlay-light {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(10, 10, 18, 0.3) 0%, transparent 50%, rgba(10, 10, 18, 0.2) 100%);
+            inset: 0;
+            background: linear-gradient(135deg, rgba(10,10,18,0.3) 0%, transparent 50%, rgba(10,10,18,0.2) 100%);
             z-index: 0;
             transition: all 0.8s ease;
         }
         .hero-section:hover .hero-overlay-light {
-            background: linear-gradient(135deg, rgba(10, 10, 18, 0.1) 0%, transparent 50%, rgba(10, 10, 18, 0.05) 100%);
+            background: linear-gradient(135deg, rgba(10,10,18,0.1) 0%, transparent 50%, rgba(10,10,18,0.05) 100%);
         }
         .hero-content {
             position: relative;
             z-index: 1;
-            animation: fadeInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            animation: fadeInUp 1.2s cubic-bezier(0.23,1,0.32,1) forwards;
         }
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(60px) scale(0.95); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
         
-        /* ===== ПЕЧАТНАЯ МАШИНКА ===== */
+        /* ПЕЧАТНАЯ МАШИНКА */
         .typewriter-container { min-height: 60px; }
         .typewriter-text {
             font-size: 1.3rem;
@@ -211,7 +188,7 @@
             50% { border-color: transparent; }
         }
         
-        /* ===== КНОПКА "НАВЕРХ" ===== */
+        /* КНОПКА "НАВЕРХ" */
         #backToTop {
             position: fixed;
             bottom: 30px;
@@ -228,25 +205,20 @@
             opacity: 0;
             visibility: hidden;
             transform: translateY(20px);
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            box-shadow: 0 4px 20px rgba(34, 138, 59, 0.3);
+            transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
+            box-shadow: 0 4px 20px rgba(34,138,59,0.3);
         }
         #backToTop.visible { opacity: 1; visibility: visible; transform: translateY(0); }
         #backToTop:hover {
             transform: translateY(-4px) scale(1.1);
-            box-shadow: 0 8px 40px rgba(34, 138, 59, 0.5);
+            box-shadow: 0 8px 40px rgba(34,138,59,0.5);
         }
         
-        /* ============================================================
-           DISCORD ПОПАП (ОБЩИЙ СТИЛЬ)
-           ============================================================ */
+        /* МОДАЛЬНЫЕ ОКНА */
         .discord-modal-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            inset: 0;
+            background: rgba(0,0,0,0.7);
             backdrop-filter: blur(10px);
             z-index: 99999;
             display: flex;
@@ -257,50 +229,45 @@
             transition: all 0.4s ease;
         }
         .discord-modal-overlay.active { opacity: 1; visibility: visible; }
-        
         .discord-modal {
-            background: rgba(20, 20, 40, 0.95);
+            background: rgba(20,20,40,0.95);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(34, 138, 59, 0.2);
+            border: 1px solid rgba(34,138,59,0.2);
             border-radius: 24px;
             padding: 40px;
             max-width: 480px;
             width: 90%;
             text-align: center;
             transform: scale(0.9) translateY(30px);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
             position: relative;
         }
         .discord-modal-overlay.active .discord-modal { transform: scale(1) translateY(0); }
-        
         .discord-modal-close {
             position: absolute;
             top: 15px;
             right: 20px;
             background: none;
             border: none;
-            color: rgba(255, 255, 255, 0.3);
+            color: rgba(255,255,255,0.3);
             font-size: 1.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
         }
         .discord-modal-close:hover { color: #fff; transform: rotate(90deg); }
-        
         .discord-modal-icon {
             font-size: 4rem;
             margin-bottom: 15px;
         }
         .discord-modal-icon.discord-blue { color: #5865F2; }
         .discord-modal-icon.mvd-red { color: #ef4444; }
-        
         .discord-modal h3 { color: #fff; font-weight: 800; margin-bottom: 10px; }
         .discord-modal p {
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255,255,255,0.6);
             font-size: 0.95rem;
             margin-bottom: 25px;
             line-height: 1.6;
         }
-        
         .discord-modal .btn-discord-join {
             border: none;
             color: #fff;
@@ -312,24 +279,26 @@
             text-decoration: none;
             display: inline-block;
         }
-        .discord-modal .btn-discord-join.discord-blue-btn {
-            background: #5865F2;
-        }
+        .discord-modal .btn-discord-join.discord-blue-btn { background: #5865F2; }
         .discord-modal .btn-discord-join.discord-blue-btn:hover {
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 40px rgba(88, 101, 242, 0.3);
+            box-shadow: 0 10px 40px rgba(88,101,242,0.3);
             color: #fff;
         }
-        .discord-modal .btn-discord-join.mvd-red-btn {
-            background: #dc2626;
-        }
+        .discord-modal .btn-discord-join.mvd-red-btn { background: #dc2626; }
         .discord-modal .btn-discord-join.mvd-red-btn:hover {
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 40px rgba(220, 38, 38, 0.3);
+            box-shadow: 0 10px 40px rgba(220,38,38,0.3);
+            color: #fff;
+        }
+        .discord-modal .btn-discord-join.tiktok-black-btn { background: #000; }
+        .discord-modal .btn-discord-join.tiktok-black-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
             color: #fff;
         }
         
-        /* ===== ТЕКСТ ===== */
+        /* ТЕКСТОВЫЕ ГРАДИЕНТЫ */
         .text-gradient {
             background: linear-gradient(135deg, #228a3b, #2ecc71, #1a6f2e);
             -webkit-background-clip: text;
@@ -350,20 +319,18 @@
             100% { background-position: 0% 50%; }
         }
         
-        /* ===== КАРТОЧКИ ===== */
+        /* КАРТОЧКИ */
         .glass-card {
-            background: rgba(0, 0, 0, 0.45);
+            background: rgba(0,0,0,0.45);
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(34, 138, 59, 0.1);
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 1px solid rgba(34,138,59,0.1);
+            transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
             position: relative;
             overflow: hidden;
             height: 100%;
             display: flex;
             flex-direction: column;
             border-radius: 20px !important;
-            will-change: transform;
         }
         .glass-card::after {
             content: '';
@@ -372,42 +339,40 @@
             left: -100%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle at center, rgba(34, 138, 59, 0.06), transparent 70%);
+            background: radial-gradient(circle at center, rgba(34,138,59,0.06), transparent 70%);
             transform: scale(0);
-            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: transform 0.8s cubic-bezier(0.23,1,0.32,1);
             pointer-events: none;
         }
         .glass-card:hover::after { transform: scale(1); }
         .glass-card:hover {
             transform: translateY(-12px) scale(1.05);
-            border-color: rgba(34, 138, 59, 0.35);
-            box-shadow: 0 30px 80px rgba(34, 138, 59, 0.15);
-            background: rgba(0, 0, 0, 0.6);
+            border-color: rgba(34,138,59,0.35);
+            box-shadow: 0 30px 80px rgba(34,138,59,0.15);
+            background: rgba(0,0,0,0.6);
         }
         
-        /* ===== РЕСУРСЫ ===== */
+        /* КАРТОЧКИ РЕСУРСОВ */
         .resource-card {
-            background: rgba(0, 0, 0, 0.45);
+            background: rgba(0,0,0,0.45);
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(34, 138, 59, 0.08);
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            text-decoration: none;
+            border: 1px solid rgba(34,138,59,0.08);
+            transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
             color: #fff;
             position: relative;
             display: block;
             height: 100%;
             border-radius: 20px !important;
-            will-change: transform;
             cursor: pointer;
             width: 100%;
             text-align: left;
+            text-decoration: none;
         }
         .resource-card::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(34, 138, 59, 0.05), transparent 60%);
+            background: linear-gradient(135deg, rgba(34,138,59,0.05), transparent 60%);
             opacity: 0;
             transition: opacity 0.6s ease;
             border-radius: 20px;
@@ -415,13 +380,13 @@
         .resource-card:hover::before { opacity: 1; }
         .resource-card:hover {
             transform: translateY(-8px) scale(1.04);
-            border-color: rgba(34, 138, 59, 0.3);
-            box-shadow: 0 25px 60px rgba(34, 138, 59, 0.1);
+            border-color: rgba(34,138,59,0.3);
+            box-shadow: 0 25px 60px rgba(34,138,59,0.1);
             color: #fff;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0,0,0,0.6);
         }
         .resource-arrow {
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
             flex-shrink: 0;
         }
         .resource-card:hover .resource-arrow {
@@ -429,16 +394,15 @@
             opacity: 1 !important;
         }
         
-        /* ===== КНОПКИ ===== */
+        /* КНОПКИ */
         .btn-green {
             background: linear-gradient(135deg, #228a3b, #1a6f2e);
             border: none;
             color: #fff;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
             position: relative;
             overflow: hidden;
             border-radius: 50px !important;
-            will-change: transform;
         }
         .btn-green::before {
             content: '';
@@ -453,79 +417,75 @@
         .btn-green span, .btn-green i { position: relative; z-index: 1; }
         .btn-green:hover {
             transform: translateY(-4px) scale(1.06);
-            box-shadow: 0 20px 60px rgba(34, 138, 59, 0.35);
+            box-shadow: 0 20px 60px rgba(34,138,59,0.35);
             color: #fff;
         }
         .btn-green:active { transform: scale(0.96); }
         
         .btn-outline-green {
-            border: 2px solid rgba(34, 138, 59, 0.4);
+            border: 2px solid rgba(34,138,59,0.4);
             color: #fff;
             background: transparent;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
             position: relative;
             overflow: hidden;
             border-radius: 50px !important;
-            will-change: transform;
         }
         .btn-outline-green::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(34, 138, 59, 0.1);
+            background: rgba(34,138,59,0.1);
             transform: scaleX(0);
             transform-origin: right;
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: transform 0.5s cubic-bezier(0.23,1,0.32,1);
             border-radius: 50px;
         }
         .btn-outline-green:hover::before { transform: scaleX(1); transform-origin: left; }
         .btn-outline-green:hover {
             border-color: #2ecc71;
             transform: translateY(-4px) scale(1.06);
-            box-shadow: 0 20px 60px rgba(34, 138, 59, 0.15);
+            box-shadow: 0 20px 60px rgba(34,138,59,0.15);
             color: #fff;
         }
         
         .btn-outline-light-green {
-            border: 1px solid rgba(34, 138, 59, 0.25);
+            border: 1px solid rgba(34,138,59,0.25);
             color: #fff;
             background: transparent;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
             border-radius: 50px !important;
-            will-change: transform;
         }
         .btn-outline-light-green:hover {
-            background: rgba(34, 138, 59, 0.15);
+            background: rgba(34,138,59,0.15);
             border-color: #2ecc71;
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 12px 30px rgba(34, 138, 59, 0.12);
+            box-shadow: 0 12px 30px rgba(34,138,59,0.12);
             color: #fff;
         }
         
-        /* ===== НАВИГАЦИЯ ===== */
+        /* НАВИГАЦИЯ */
         .navbar-glass {
-            background: rgba(10, 10, 18, 0.5);
+            background: rgba(10,10,18,0.5);
             backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border-bottom: 1px solid rgba(34, 138, 59, 0.05);
+            border-bottom: 1px solid rgba(34,138,59,0.05);
             transition: all 0.5s ease;
             z-index: 1000;
         }
         .navbar-glass.scrolled {
-            background: rgba(10, 10, 18, 0.7);
-            border-bottom-color: rgba(34, 138, 59, 0.1);
+            background: rgba(10,10,18,0.7);
+            border-bottom-color: rgba(34,138,59,0.1);
         }
         .nav-link-custom {
             position: relative;
-            color: rgba(255, 255, 255, 0.5) !important;
+            color: rgba(255,255,255,0.5) !important;
             font-weight: 600;
             font-size: 0.85rem;
             letter-spacing: 0.8px;
             padding: 8px 20px !important;
             border-radius: 50px !important;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
             text-transform: uppercase;
-            will-change: transform;
         }
         .nav-link-custom::before {
             content: '';
@@ -536,19 +496,19 @@
             width: 50%;
             height: 2px;
             background: linear-gradient(90deg, #228a3b, #2ecc71);
-            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
             border-radius: 2px;
         }
         .nav-link-custom:hover::before,
         .nav-link-custom.active::before { transform: translateX(-50%) scaleX(1); }
         .nav-link-custom:hover {
             color: #fff !important;
-            background: rgba(34, 138, 59, 0.06);
+            background: rgba(34,138,59,0.06);
             transform: translateY(-2px) scale(1.05);
         }
         .nav-link-custom.active {
             color: #fff !important;
-            background: rgba(34, 138, 59, 0.1);
+            background: rgba(34,138,59,0.1);
         }
         .nav-link-custom i {
             margin-right: 8px;
@@ -557,7 +517,7 @@
         }
         .nav-link-custom:hover i { transform: scale(1.15) rotate(-5deg); }
         
-        /* ===== STEP ===== */
+        /* ШАГИ */
         .step-number {
             font-size: 3rem;
             font-weight: 900;
@@ -582,48 +542,46 @@
             justify-content: center;
             font-size: 1.8rem;
             flex-shrink: 0;
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
         }
         .glass-card:hover .step-icon-wrapper { transform: scale(1.12) rotate(-6deg); }
-        .step-icon-green { background: rgba(34, 138, 59, 0.15); color: #2ecc71; }
-        .step-icon-light { background: rgba(46, 204, 113, 0.15); color: #2ecc71; }
-        .step-icon-dark { background: rgba(26, 111, 46, 0.15); color: #228a3b; }
+        .step-icon-green { background: rgba(34,138,59,0.15); color: #2ecc71; }
+        .step-icon-light { background: rgba(46,204,113,0.15); color: #2ecc71; }
+        .step-icon-dark { background: rgba(26,111,46,0.15); color: #228a3b; }
         .step-badge {
-            background: rgba(34, 138, 59, 0.15);
+            background: rgba(34,138,59,0.15);
             color: #2ecc71;
             font-size: 0.65rem;
             font-weight: 700;
             padding: 4px 14px;
             border-radius: 50px !important;
             text-transform: uppercase;
-            border: 1px solid rgba(34, 138, 59, 0.08);
+            border: 1px solid rgba(34,138,59,0.08);
             transition: all 0.4s ease;
             white-space: nowrap;
         }
         .glass-card:hover .step-badge {
-            background: rgba(34, 138, 59, 0.25);
+            background: rgba(34,138,59,0.25);
             color: #2ecc71;
             transform: scale(1.06);
         }
         
-        /* ===== FINAL ===== */
+        /* ФИНАЛЬНАЯ КАРТОЧКА */
         .final-card {
-            background: rgba(0, 0, 0, 0.45);
-            border: 1px solid rgba(34, 138, 59, 0.12);
+            background: rgba(0,0,0,0.45);
+            border: 1px solid rgba(34,138,59,0.12);
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
             border-radius: 20px !important;
-            will-change: transform;
         }
         .final-card:hover {
-            border-color: rgba(34, 138, 59, 0.3);
-            box-shadow: 0 20px 60px rgba(34, 138, 59, 0.08);
+            border-color: rgba(34,138,59,0.3);
+            box-shadow: 0 20px 60px rgba(34,138,59,0.08);
             transform: scale(1.03);
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0,0,0,0.6);
         }
         .final-badge {
-            background: rgba(34, 138, 59, 0.15);
+            background: rgba(34,138,59,0.15);
             color: #2ecc71;
             padding: 4px 16px;
             border-radius: 50px !important;
@@ -633,62 +591,58 @@
         }
         .final-card:hover .final-badge { transform: scale(1.05); }
         
-        /* ===== ALERTS ===== */
+        /* ПРЕДУПРЕЖДЕНИЯ */
         .alert-glow-danger,
         .alert-glow-warning {
-            background: rgba(0, 0, 0, 0.45);
+            background: rgba(0,0,0,0.45);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             border-radius: 16px !important;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
             height: 100%;
-            will-change: transform;
         }
         .alert-glow-danger:hover,
         .alert-glow-warning:hover {
             transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
-        .alert-glow-danger { border: 1px solid rgba(239, 68, 68, 0.15); }
-        .alert-glow-warning { border: 1px solid rgba(245, 158, 11, 0.15); }
+        .alert-glow-danger { border: 1px solid rgba(239,68,68,0.15); }
+        .alert-glow-warning { border: 1px solid rgba(245,158,11,0.15); }
         
-        /* ===== БЭЙДЖИ ===== */
+        /* БЭЙДЖИ */
         .badge-server {
-            background: rgba(34, 138, 59, 0.2) !important;
+            background: rgba(34,138,59,0.2) !important;
             color: #2ecc71 !important;
-            border: 1px solid rgba(34, 138, 59, 0.2);
+            border: 1px solid rgba(34,138,59,0.2);
             padding: 6px 16px;
             font-weight: 700;
             font-size: 0.85rem;
             border-radius: 50px !important;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
             display: inline-block;
-            will-change: transform;
         }
         .badge-server:hover {
             transform: scale(1.08);
-            background: rgba(34, 138, 59, 0.3) !important;
-            box-shadow: 0 8px 30px rgba(34, 138, 59, 0.2);
+            background: rgba(34,138,59,0.3) !important;
+            box-shadow: 0 8px 30px rgba(34,138,59,0.2);
         }
         .badge-base {
-            background: rgba(34, 138, 59, 0.2) !important;
+            background: rgba(34,138,59,0.2) !important;
             color: #2ecc71 !important;
-            border: 1px solid rgba(34, 138, 59, 0.15);
+            border: 1px solid rgba(34,138,59,0.15);
             padding: 8px 20px;
             font-weight: 600;
             font-size: 0.85rem;
             letter-spacing: 0.5px;
             border-radius: 50px !important;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
             display: inline-block;
-            will-change: transform;
         }
         .badge-base:hover {
             transform: scale(1.05);
-            background: rgba(34, 138, 59, 0.3) !important;
+            background: rgba(34,138,59,0.3) !important;
         }
         
-        /* ===== ИКОНКИ ===== */
+        /* ИКОНКИ */
         .icon-box {
             width: 50px;
             height: 50px;
@@ -698,28 +652,29 @@
             justify-content: center;
             font-size: 1.5rem;
             flex-shrink: 0;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
         }
         .resource-card:hover .icon-box { transform: scale(1.12) rotate(-8deg); }
-        .icon-discord { background: rgba(88, 101, 242, 0.15); color: #818cf8; }
-        .icon-mvd { background: rgba(239, 68, 68, 0.12); color: #f87171; }
+        .icon-discord { background: rgba(88,101,242,0.15); color: #818cf8; }
+        .icon-mvd { background: rgba(239,68,68,0.12); color: #f87171; }
+        .icon-tiktok { background: rgba(0,0,0,0.15); color: #fff; }
         
         .code-block {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0,0,0,0.5);
             color: #fcd34d;
             font-size: 0.7rem;
             padding: 8px 12px;
             border-radius: 10px !important;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255,255,255,0.05);
             word-break: break-all;
             transition: all 0.4s ease;
         }
         .glass-card:hover .code-block {
-            border-color: rgba(34, 138, 59, 0.15);
+            border-color: rgba(34,138,59,0.15);
             transform: scale(1.02);
         }
         
-        /* ===== ОБЩЕЕ ===== */
+        /* ЗАГОЛОВКИ СЕКЦИЙ */
         .section-title {
             font-size: 2.8rem;
             font-weight: 900;
@@ -729,6 +684,7 @@
         .anchor-offset { scroll-margin-top: 80px; }
         .section-bg { position: relative; z-index: 1; }
         
+        /* СКРОЛЛБАР */
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: #0a0a12; }
         ::-webkit-scrollbar-thumb {
@@ -739,7 +695,7 @@
             background: linear-gradient(180deg, #2ecc71, #228a3b);
         }
         
-        /* ===== RESPONSIVE ===== */
+        /* АДАПТИВНОСТЬ */
         @media (max-width: 992px) {
             .section-title { font-size: 2.2rem; }
             #globalGlow { width: 400px; height: 400px; }
@@ -778,7 +734,7 @@
 </head>
 <body>
 
-    <!-- ===== ПРЕЛОАДЕР ===== -->
+    <!-- ПРЕЛОАДЕР -->
     <div id="preloader">
         <div class="preloader-content">
             <div class="preloader-logo">REX <span>RP</span></div>
@@ -795,16 +751,16 @@
         </div>
     </div>
 
-    <!-- ===== СВЕТ ЗА КУРСОРОМ ===== -->
+    <!-- СВЕТ ЗА КУРСОРОМ -->
     <div id="globalGlow"></div>
 
-    <!-- ===== ЧАСТИЦЫ ===== -->
+    <!-- ЧАСТИЦЫ -->
     <canvas id="particlesCanvas"></canvas>
 
-    <!-- ===== КНОПКА "НАВЕРХ" ===== -->
+    <!-- КНОПКА "НАВЕРХ" -->
     <button id="backToTop" title="Наверх"><i class="fas fa-arrow-up"></i></button>
 
-    <!-- ===== DISCORD ПОПАП (ОСНОВНОЙ) ===== -->
+    <!-- МОДАЛКА DISCORD -->
     <div class="discord-modal-overlay" id="discordModal">
         <div class="discord-modal">
             <button class="discord-modal-close" id="discordModalClose"><i class="fas fa-times"></i></button>
@@ -815,7 +771,7 @@
         </div>
     </div>
 
-    <!-- ===== DISCORD ПОПАП (МВД) ===== -->
+    <!-- МОДАЛКА МВД -->
     <div class="discord-modal-overlay" id="discordModalMVD">
         <div class="discord-modal">
             <button class="discord-modal-close" id="discordModalCloseMVD"><i class="fas fa-times"></i></button>
@@ -826,7 +782,20 @@
         </div>
     </div>
 
-    <!-- ===== НАВИГАЦИЯ ===== -->
+    <!-- МОДАЛКА TIKTOK (ИСПРАВЛЕННАЯ) -->
+    <div class="discord-modal-overlay" id="tiktokModal">
+        <div class="discord-modal">
+            <button class="discord-modal-close" id="tiktokModalClose"><i class="fas fa-times"></i></button>
+            <div style="background: #000; color: #fff; border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 3rem;">
+                <i class="fab fa-tiktok"></i>
+            </div>
+            <h3>Наш TikTok</h3>
+            <p>Короткие видео с сервера, мемы, моменты из игры и не только. Подписывайся!</p>
+            <a href="https://www.tiktok.com/@rexrpradmir" target="_blank" class="btn-discord-join" style="background: #000;"><i class="fab fa-tiktok me-2"></i> Перейти в TikTok</a>
+        </div>
+    </div>
+
+    <!-- НАВИГАЦИЯ -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-glass" id="mainNav">
         <div class="container">
             <a class="navbar-brand fw-bold fs-2" href="#">
@@ -845,7 +814,7 @@
         </div>
     </nav>
 
-    <!-- ===== HERO ===== -->
+    <!-- ГЛАВНЫЙ ЭКРАН -->
     <section class="hero-section anchor-offset" id="about">
         <div class="hero-overlay-light"></div>
         <div class="container hero-content py-5">
@@ -868,16 +837,14 @@
         </div>
     </section>
 
-    <!-- ===== ИНСТРУКЦИЯ ===== -->
-    <section class="py-5 anchor-offset section-bg" id="howto" style="background: rgba(10, 10, 18, 0.4); backdrop-filter: blur(10px);">
+    <!-- ИНСТРУКЦИЯ -->
+    <section class="py-5 anchor-offset section-bg" id="howto" style="background: rgba(10,10,18,0.4); backdrop-filter: blur(10px);">
         <div class="container my-4">
             <div class="text-center mb-5">
                 <h2 class="section-title text-white">КАК ЗАЙТИ НА <span class="text-gradient">СЕРВЕР?</span></h2>
                 <p class="text-white-50 fs-5">Всего 3 простых шага — и ты в игре!</p>
             </div>
-
             <div class="row g-4">
-                <!-- ШАГ 1 -->
                 <div class="col-12 col-md-4">
                     <div class="glass-card rounded-4 p-4">
                         <div class="d-flex align-items-start gap-3">
@@ -896,8 +863,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- ШАГ 2 -->
                 <div class="col-12 col-md-4">
                     <div class="glass-card rounded-4 p-4">
                         <div class="d-flex align-items-start gap-3">
@@ -905,7 +870,7 @@
                             <div class="flex-grow-1 min-width-0">
                                 <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
                                     <span class="step-number" style="background: linear-gradient(135deg, #2ecc71, #228a3b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: 0.4;">02</span>
-                                    <span class="step-badge" style="background: rgba(46, 204, 113, 0.15); color: #2ecc71; border-color: rgba(46, 204, 113, 0.08);">Файлы</span>
+                                    <span class="step-badge" style="background: rgba(46,204,113,0.15); color: #2ecc71; border-color: rgba(46,204,113,0.08);">Файлы</span>
                                 </div>
                                 <h5 class="fw-bold text-white mt-2">Подготовка коннекта</h5>
                                 <p class="text-white-50 small">Скачай <strong class="text-white">boconnect.zip</strong>, распакуй и нажми <strong class="text-white">«ЗАГРУЗИТЬ»</strong> в лаунчере.</p>
@@ -916,16 +881,14 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- ШАГ 3 -->
                 <div class="col-12 col-md-4">
-                    <div class="glass-card rounded-4 p-4" style="border-color: rgba(46, 204, 113, 0.1);">
+                    <div class="glass-card rounded-4 p-4" style="border-color: rgba(46,204,113,0.1);">
                         <div class="d-flex align-items-start gap-3">
                             <div class="step-icon-wrapper step-icon-dark flex-shrink-0"><i class="fas fa-wrench"></i></div>
                             <div class="flex-grow-1 min-width-0">
                                 <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
                                     <span class="step-number" style="background: linear-gradient(135deg, #228a3b, #1a6f2e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: 0.4;">03</span>
-                                    <span class="step-badge" style="background: rgba(26, 111, 46, 0.15); color: #228a3b; border-color: rgba(26, 111, 46, 0.08);">Настройка</span>
+                                    <span class="step-badge" style="background: rgba(26,111,46,0.15); color: #228a3b; border-color: rgba(26,111,46,0.08);">Настройка</span>
                                 </div>
                                 <h5 class="fw-bold text-white mt-2">Установка файлов</h5>
                                 <p class="text-white-50 small">Перенеси файлы в папку с игрой:</p>
@@ -935,8 +898,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- ФИНАЛ -->
                 <div class="col-12">
                     <div class="final-card rounded-4 p-4">
                         <div class="row align-items-center">
@@ -954,8 +915,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- ВАЖНО -->
             <div class="row mt-4 g-3">
                 <div class="col-12 col-md-6">
                     <div class="alert-glow-danger p-4">
@@ -973,77 +932,69 @@
         </div>
     </section>
 
-<!-- ===== РЕСУРСЫ ===== -->
-<section class="py-5 anchor-offset section-bg" id="links" style="background: rgba(7, 7, 14, 0.4); backdrop-filter: blur(10px);">
-    <div class="container my-4">
-        <div class="text-center mb-5">
-            <h2 class="section-title text-white">РЕСУРСЫ <span class="text-gradient">ПРОЕКТА</span></h2>
-            <p class="text-white-50 fs-5">Всё, что нужно для игры и общения</p>
-        </div>
-        <div class="row g-4 justify-content-center">
-            
-            <!-- Discord -->
-            <div class="col-12 col-md-4">
-                <button class="resource-card rounded-4 p-4" id="discordModalOpen2">
-                    <div class="d-flex align-items-center gap-3">
-                        <div class="icon-box icon-discord flex-shrink-0"><i class="fab fa-discord"></i></div>
-                        <div class="flex-grow-1 min-width-0">
-                            <h5 class="fw-bold text-white mb-1">Официальный Discord</h5>
-                            <p class="text-white-50 mb-0 small">Общение, новости, техподдержка и обзвоны.</p>
+    <!-- РЕСУРСЫ -->
+    <section class="py-5 anchor-offset section-bg" id="links" style="background: rgba(7,7,14,0.4); backdrop-filter: blur(10px);">
+        <div class="container my-4">
+            <div class="text-center mb-5">
+                <h2 class="section-title text-white">РЕСУРСЫ <span class="text-gradient">ПРОЕКТА</span></h2>
+                <p class="text-white-50 fs-5">Всё, что нужно для игры и общения</p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-12 col-md-4">
+                    <button class="resource-card rounded-4 p-4" id="discordModalOpen2">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="icon-box icon-discord flex-shrink-0"><i class="fab fa-discord"></i></div>
+                            <div class="flex-grow-1 min-width-0">
+                                <h5 class="fw-bold text-white mb-1">Официальный Discord</h5>
+                                <p class="text-white-50 mb-0 small">Общение, новости, техподдержка и обзвоны.</p>
+                            </div>
+                            <span class="fs-2 text-white-50 opacity-25 resource-arrow">→</span>
                         </div>
-                        <span class="fs-2 text-white-50 opacity-25 resource-arrow">→</span>
-                    </div>
-                </button>
-            </div>
-
-            <!-- МВД -->
-            <div class="col-12 col-md-4">
-                <button class="resource-card rounded-4 p-4" id="discordModalOpenMVD">
-                    <div class="d-flex align-items-center gap-3">
-                        <div class="icon-box icon-mvd flex-shrink-0"><i class="fas fa-shield-halved"></i></div>
-                        <div class="flex-grow-1 min-width-0">
-                            <h5 class="fw-bold text-white mb-1">Портал МВД (Полиция)</h5>
-                            <p class="text-white-50 mb-0 small">Уставы, УК РФ, КоАП, ФЗоП и отчётность.</p>
+                    </button>
+                </div>
+                <div class="col-12 col-md-4">
+                    <button class="resource-card rounded-4 p-4" id="discordModalOpenMVD">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="icon-box icon-mvd flex-shrink-0"><i class="fas fa-shield-halved"></i></div>
+                            <div class="flex-grow-1 min-width-0">
+                                <h5 class="fw-bold text-white mb-1">Портал МВД (Полиция)</h5>
+                                <p class="text-white-50 mb-0 small">Уставы, УК РФ, КоАП, ФЗоП и отчётность.</p>
+                            </div>
+                            <span class="fs-2 text-white-50 opacity-25 resource-arrow">→</span>
                         </div>
-                        <span class="fs-2 text-white-50 opacity-25 resource-arrow">→</span>
-                    </div>
-                </button>
+                    </button>
+                </div>
+                <div class="col-12 col-md-4">
+                    <button class="resource-card rounded-4 p-4" id="tiktokModalOpen">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="icon-box icon-tiktok flex-shrink-0"><i class="fab fa-tiktok"></i></div>
+                            <div class="flex-grow-1 min-width-0">
+                                <h5 class="fw-bold text-white mb-1">TikTok</h5>
+                                <p class="text-white-50 mb-0 small">Короткие видео с сервера, мемы и моменты.</p>
+                            </div>
+                            <span class="fs-2 text-white-50 opacity-25 resource-arrow">→</span>
+                        </div>
+                    </button>
+                </div>
             </div>
-
-<!-- TikTok -->
-<div class="col-12 col-md-4">
-    <button class="resource-card rounded-4 p-4" id="tiktokModalOpen">
-        <div class="d-flex align-items-center gap-3">
-            <div class="icon-box" style="background: rgba(0, 0, 0, 0.15); color: #fff;">
-                <i class="fab fa-tiktok"></i>
-            </div>
-            <div class="flex-grow-1 min-width-0">
-                <h5 class="fw-bold text-white mb-1">TikTok</h5>
-                <p class="text-white-50 mb-0 small">Короткие видео с сервера, мемы и моменты.</p>
-            </div>
-            <span class="fs-2 text-white-50 opacity-25 resource-arrow">→</span>
         </div>
-    </button>
-</div>
-</section>
+    </section>
 
-    <!-- ===== ФУТЕР ===== -->
-    <footer class="py-4 text-center border-top" style="background: rgba(10, 10, 18, 0.4); border-color: rgba(255, 255, 255, 0.03) !important; backdrop-filter: blur(10px); position: relative; z-index: 1;">
+    <!-- ПОДВАЛ -->
+    <footer class="py-4 text-center border-top" style="background: rgba(10,10,18,0.4); border-color: rgba(255,255,255,0.03) !important; backdrop-filter: blur(10px); position: relative; z-index: 1;">
         <div class="container"><p class="text-white-50 mb-0 small">&copy; 2026 REX RP. Сайт-инструкция игрового сервера на базе Radmir Online.</p></div>
     </footer>
 
-    <!-- ===== JS ===== -->
+    <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // ===== ПРЕЛОАДЕР =====
+            // ПРЕЛОАДЕР
             const preloader = document.getElementById('preloader');
-            setTimeout(() => {
-                preloader.classList.add('hidden');
-            }, 2500);
+            setTimeout(() => { preloader.classList.add('hidden'); }, 2500);
 
-            // ===== ПЕЧАТНАЯ МАШИНКА =====
+            // ПЕЧАТНАЯ МАШИНКА
             const phrases = [
                 'Создай свою историю в криминальном мире',
                 'Стань лидером банды или бизнесменом',
@@ -1051,15 +1002,10 @@
                 'Строй свою империю на REX RP',
                 'Выбирай свой путь: полиция, мафия или бизнес'
             ];
-            
-            let currentPhraseIndex = 0;
-            let currentCharIndex = 0;
-            let isDeleting = false;
+            let currentPhraseIndex = 0, currentCharIndex = 0, isDeleting = false;
             const typewriterElement = document.getElementById('typewriterText');
-            
             function typeWriter() {
                 const currentPhrase = phrases[currentPhraseIndex];
-                
                 if (isDeleting) {
                     typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex - 1);
                     currentCharIndex--;
@@ -1067,9 +1013,7 @@
                     typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex + 1);
                     currentCharIndex++;
                 }
-                
                 let speed = isDeleting ? 50 : 100;
-                
                 if (!isDeleting && currentCharIndex === currentPhrase.length) {
                     speed = 3000;
                     isDeleting = true;
@@ -1078,41 +1022,33 @@
                     currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
                     speed = 500;
                 }
-                
                 setTimeout(typeWriter, speed);
             }
-            
             setTimeout(typeWriter, 1000);
 
-            // ===== СВЕТ ЗА КУРСОРОМ =====
+            // СВЕТ ЗА КУРСОРОМ
             const glow = document.getElementById('globalGlow');
             document.addEventListener('mousemove', function(e) {
                 glow.style.left = e.clientX + 'px';
                 glow.style.top = e.clientY + 'px';
                 glow.classList.add('active');
             });
-            document.addEventListener('mouseleave', function() {
-                glow.classList.remove('active');
-            });
+            document.addEventListener('mouseleave', function() { glow.classList.remove('active'); });
 
-            // ===== ЧАСТИЦЫ =====
+            // ЧАСТИЦЫ
             const canvas = document.getElementById('particlesCanvas');
             const ctx = canvas.getContext('2d');
             let width, height;
             let particles = [];
             const particleCount = 80;
-
             function resize() {
                 width = canvas.width = window.innerWidth;
                 height = canvas.height = window.innerHeight;
             }
             window.addEventListener('resize', resize);
             resize();
-
             class Particle {
-                constructor() {
-                    this.reset();
-                }
+                constructor() { this.reset(); }
                 reset() {
                     this.x = Math.random() * width;
                     this.y = Math.random() * height;
@@ -1124,9 +1060,7 @@
                 update() {
                     this.x += this.speedX;
                     this.y += this.speedY;
-                    if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
-                        this.reset();
-                    }
+                    if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) { this.reset(); }
                 }
                 draw() {
                     ctx.beginPath();
@@ -1138,40 +1072,27 @@
                     ctx.shadowBlur = 0;
                 }
             }
-
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-
+            for (let i = 0; i < particleCount; i++) { particles.push(new Particle()); }
             function animateParticles() {
                 ctx.clearRect(0, 0, width, height);
-                particles.forEach(p => {
-                    p.update();
-                    p.draw();
-                });
+                particles.forEach(p => { p.update(); p.draw(); });
                 requestAnimationFrame(animateParticles);
             }
             animateParticles();
 
-            // ===== КНОПКА "НАВЕРХ" =====
+            // КНОПКА "НАВЕРХ"
             const backToTop = document.getElementById('backToTop');
             window.addEventListener('scroll', function() {
-                if (window.scrollY > 300) {
-                    backToTop.classList.add('visible');
-                } else {
-                    backToTop.classList.remove('visible');
-                }
+                if (window.scrollY > 300) { backToTop.classList.add('visible'); }
+                else { backToTop.classList.remove('visible'); }
             });
-            backToTop.addEventListener('click', function() {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
+            backToTop.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-            // ===== DISCORD ПОПАП (ОСНОВНОЙ) =====
+            // МОДАЛКА DISCORD
             const discordModal = document.getElementById('discordModal');
             const discordModalOpen = document.getElementById('discordModalOpen');
             const discordModalOpen2 = document.getElementById('discordModalOpen2');
             const discordModalClose = document.getElementById('discordModalClose');
-
             function openDiscordModal() {
                 discordModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
@@ -1180,22 +1101,16 @@
                 discordModal.classList.remove('active');
                 document.body.style.overflow = '';
             }
-
             discordModalOpen.addEventListener('click', openDiscordModal);
             discordModalOpen2.addEventListener('click', openDiscordModal);
             discordModalClose.addEventListener('click', closeDiscordModal);
-            discordModal.addEventListener('click', function(e) {
-                if (e.target === this) closeDiscordModal();
-            });
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') closeDiscordModal();
-            });
+            discordModal.addEventListener('click', function(e) { if (e.target === this) closeDiscordModal(); });
+            document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeDiscordModal(); });
 
-            // ===== DISCORD ПОПАП (МВД) =====
+            // МОДАЛКА МВД
             const discordModalMVD = document.getElementById('discordModalMVD');
             const discordModalOpenMVD = document.getElementById('discordModalOpenMVD');
             const discordModalCloseMVD = document.getElementById('discordModalCloseMVD');
-
             function openDiscordModalMVD() {
                 discordModalMVD.classList.add('active');
                 document.body.style.overflow = 'hidden';
@@ -1204,19 +1119,31 @@
                 discordModalMVD.classList.remove('active');
                 document.body.style.overflow = '';
             }
-
             discordModalOpenMVD.addEventListener('click', openDiscordModalMVD);
             discordModalCloseMVD.addEventListener('click', closeDiscordModalMVD);
-            discordModalMVD.addEventListener('click', function(e) {
-                if (e.target === this) closeDiscordModalMVD();
-            });
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') closeDiscordModalMVD();
-            });
+            discordModalMVD.addEventListener('click', function(e) { if (e.target === this) closeDiscordModalMVD(); });
+            document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeDiscordModalMVD(); });
 
-            // ===== ПЛАВНАЯ ПРОКРУТКА =====
+            // МОДАЛКА TIKTOK
+            const tiktokModal = document.getElementById('tiktokModal');
+            const tiktokModalOpen = document.getElementById('tiktokModalOpen');
+            const tiktokModalClose = document.getElementById('tiktokModalClose');
+            function openTiktokModal() {
+                tiktokModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeTiktokModal() {
+                tiktokModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            tiktokModalOpen.addEventListener('click', openTiktokModal);
+            tiktokModalClose.addEventListener('click', closeTiktokModal);
+            tiktokModal.addEventListener('click', function(e) { if (e.target === this) closeTiktokModal(); });
+            document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeTiktokModal(); });
+
+            // ПЛАВНАЯ ПРОКРУТКА
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
+                anchor.addEventListener('click', function(e) {
                     const targetId = this.getAttribute('href');
                     if (targetId === '#') return;
                     const target = document.querySelector(targetId);
@@ -1229,7 +1156,7 @@
                 });
             });
 
-            // ===== ПОДСВЕТКА АКТИВНОЙ ССЫЛКИ =====
+            // ПОДСВЕТКА АКТИВНОЙ ССЫЛКИ
             const sections = document.querySelectorAll('.anchor-offset');
             const navLinks = document.querySelectorAll('.nav-link-custom');
             window.addEventListener('scroll', function() {
@@ -1248,7 +1175,7 @@
                 else navbar.classList.remove('scrolled');
             });
 
-            // ===== ПЛАВНОЕ ПОЯВЛЕНИЕ =====
+            // ПЛАВНОЕ ПОЯВЛЕНИЕ
             const elements = document.querySelectorAll('.glass-card, .resource-card, .final-card, .alert-glow-danger, .alert-glow-warning');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1258,15 +1185,13 @@
                     }
                 });
             }, { threshold: 0.05, rootMargin: '0px 0px -50px 0px' });
-            
             elements.forEach((el, index) => {
                 el.style.opacity = '0';
                 el.style.transform = 'translateY(40px) scale(0.95)';
-                el.style.transition = 'all 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
+                el.style.transition = 'all 0.8s cubic-bezier(0.23,1,0.32,1)';
                 el.style.transitionDelay = (index * 60) + 'ms';
                 observer.observe(el);
             });
-            
             setTimeout(() => {
                 elements.forEach((el, index) => {
                     setTimeout(() => {
