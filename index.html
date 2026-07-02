@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REX RP | Инструкция по подключению</title>
     
-    <!-- ===== FAVICON ===== -->
+    <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/REX-RP-54/RexRPSite/refs/heads/main/Favicon.svg">
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/REX-RP-54/RexRPSite/refs/heads/main/Favicon.svg">
     
@@ -19,18 +19,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
-        /* ============================================================
-           БАЗА
-           ============================================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
+        /* ===== БАЗА ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         
         body {
             font-family: 'Montserrat', sans-serif;
@@ -39,6 +30,7 @@
             overflow-x: hidden;
             cursor: default;
             position: relative;
+            color: #fff;
         }
         
         :root {
@@ -47,9 +39,7 @@
             --primary-dark: #1a6f2e;
         }
         
-        /* ============================================================
-           ПРЕЛОАДЕР
-           ============================================================ */
+        /* ===== ПРЕЛОАДЕР ===== */
         #preloader {
             position: fixed;
             top: 0;
@@ -63,92 +53,69 @@
             z-index: 99999;
             transition: opacity 0.8s ease, visibility 0.8s ease;
         }
+        #preloader.hidden { opacity: 0; visibility: hidden; }
         
-        #preloader.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        
-        .preloader-content {
-            text-align: center;
-            animation: preloaderPulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes preloaderPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
-        
+        .preloader-content { text-align: center; }
         .preloader-logo {
             font-family: 'Montserrat', sans-serif;
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 900;
             letter-spacing: 3px;
-            background: linear-gradient(135deg, #228a3b, #2ecc71, #228a3b);
-            background-size: 200% 200%;
+            background: linear-gradient(135deg, #228a3b, #2ecc71);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: gradientMove 2s ease-in-out infinite;
             margin-bottom: 30px;
+            opacity: 0;
+            animation: preloaderFade 1s ease forwards;
         }
-        
         .preloader-logo span {
             background: linear-gradient(135deg, #2ecc71, #228a3b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        @keyframes preloaderFade {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
         }
         
-        .preloader-spinner {
-            width: 60px;
-            height: 60px;
+        .preloader-particles-container {
+            width: 120px;
+            height: 120px;
             margin: 0 auto 20px;
-            border: 3px solid rgba(34, 138, 59, 0.1);
-            border-top: 3px solid #228a3b;
+            position: relative;
+        }
+        .preloader-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #2ecc71;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: particleFloat 2s ease-in-out infinite;
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.5);
         }
+        .preloader-particle:nth-child(1) { top: 0%; left: 50%; animation-delay: 0s; }
+        .preloader-particle:nth-child(2) { top: 25%; left: 85%; animation-delay: 0.2s; }
+        .preloader-particle:nth-child(3) { top: 75%; left: 85%; animation-delay: 0.4s; }
+        .preloader-particle:nth-child(4) { top: 100%; left: 50%; animation-delay: 0.6s; }
+        .preloader-particle:nth-child(5) { top: 75%; left: 15%; animation-delay: 0.8s; }
+        .preloader-particle:nth-child(6) { top: 25%; left: 15%; animation-delay: 1s; }
+        .preloader-particle:nth-child(7) { top: 50%; left: 50%; animation-delay: 0.3s; width: 12px; height: 12px; background: #228a3b; }
         
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes particleFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(0, -20px) scale(1.3); }
         }
-        
-        .preloader-progress {
-            width: 200px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            margin: 0 auto 15px;
-            overflow: hidden;
-        }
-        
-        .preloader-progress-bar {
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(90deg, #228a3b, #2ecc71);
-            border-radius: 10px;
-            transition: width 0.3s ease;
-        }
-        
         .preloader-text {
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.3);
             font-family: 'Montserrat', sans-serif;
             font-size: 0.8rem;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
         }
         
-        /* ============================================================
-           ГЛОБАЛЬНЫЙ СВЕТ ЗА КУРСОРОМ
-           ============================================================ */
+        /* ===== СВЕТ ЗА КУРСОРОМ ===== */
         #globalGlow {
             position: fixed;
             width: 600px;
@@ -163,14 +130,9 @@
             mix-blend-mode: screen;
             will-change: transform, left, top;
         }
+        #globalGlow.active { opacity: 1; }
         
-        #globalGlow.active {
-            opacity: 1;
-        }
-        
-        /* ============================================================
-           ЧАСТИЦЫ НА ФОНЕ
-           ============================================================ */
+        /* ===== ЧАСТИЦЫ ===== */
         #particlesCanvas {
             position: fixed;
             top: 0;
@@ -181,9 +143,7 @@
             pointer-events: none;
         }
         
-        /* ============================================================
-           HERO
-           ============================================================ */
+        /* ===== HERO ===== */
         .hero-section {
             min-height: calc(100vh - 76px);
             position: relative;
@@ -193,7 +153,6 @@
             overflow: hidden;
             z-index: 1;
         }
-        
         .hero-section::before {
             content: '';
             position: absolute;
@@ -209,16 +168,11 @@
             animation: heroFloat 25s ease-in-out infinite alternate;
             transition: all 0.8s ease;
         }
-        
-        .hero-section:hover::before {
-            filter: blur(2px) brightness(1.0);
-        }
-        
+        .hero-section:hover::before { filter: blur(2px) brightness(1.0); }
         @keyframes heroFloat {
             0% { transform: scale(1) rotate(0deg); }
             100% { transform: scale(1.05) rotate(0.5deg); }
         }
-        
         .hero-overlay-light {
             position: absolute;
             top: 0;
@@ -229,32 +183,159 @@
             z-index: 0;
             transition: all 0.8s ease;
         }
-        
         .hero-section:hover .hero-overlay-light {
             background: linear-gradient(135deg, rgba(10, 10, 18, 0.1) 0%, transparent 50%, rgba(10, 10, 18, 0.05) 100%);
         }
-        
         .hero-content {
             position: relative;
             z-index: 1;
             animation: fadeInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
         }
-        
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(60px) scale(0.95); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
         
+        /* ===== ПЕЧАТНАЯ МАШИНКА ===== */
+        .typewriter-container { min-height: 60px; }
+        .typewriter-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2ecc71;
+            border-right: 2px solid #2ecc71;
+            padding-right: 5px;
+            animation: blink 0.8s step-end infinite;
+        }
+        @keyframes blink {
+            0%, 100% { border-color: #2ecc71; }
+            50% { border-color: transparent; }
+        }
+        
+        /* ===== КНОПКА "НАВЕРХ" ===== */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #228a3b, #1a6f2e);
+            border: none;
+            color: #fff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 4px 20px rgba(34, 138, 59, 0.3);
+        }
+        #backToTop.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        #backToTop:hover {
+            transform: translateY(-4px) scale(1.1);
+            box-shadow: 0 8px 40px rgba(34, 138, 59, 0.5);
+        }
+        
         /* ============================================================
-           ТЕКСТ
+           DISCORD ПОПАП (ОБЩИЙ СТИЛЬ)
            ============================================================ */
+        .discord-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        .discord-modal-overlay.active { opacity: 1; visibility: visible; }
+        
+        .discord-modal {
+            background: rgba(20, 20, 40, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(34, 138, 59, 0.2);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 480px;
+            width: 90%;
+            text-align: center;
+            transform: scale(0.9) translateY(30px);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+        }
+        .discord-modal-overlay.active .discord-modal { transform: scale(1) translateY(0); }
+        
+        .discord-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .discord-modal-close:hover { color: #fff; transform: rotate(90deg); }
+        
+        .discord-modal-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+        .discord-modal-icon.discord-blue { color: #5865F2; }
+        .discord-modal-icon.mvd-red { color: #ef4444; }
+        
+        .discord-modal h3 { color: #fff; font-weight: 800; margin-bottom: 10px; }
+        .discord-modal p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .discord-modal .btn-discord-join {
+            border: none;
+            color: #fff;
+            padding: 12px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .discord-modal .btn-discord-join.discord-blue-btn {
+            background: #5865F2;
+        }
+        .discord-modal .btn-discord-join.discord-blue-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 40px rgba(88, 101, 242, 0.3);
+            color: #fff;
+        }
+        .discord-modal .btn-discord-join.mvd-red-btn {
+            background: #dc2626;
+        }
+        .discord-modal .btn-discord-join.mvd-red-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 40px rgba(220, 38, 38, 0.3);
+            color: #fff;
+        }
+        
+        /* ===== ТЕКСТ ===== */
         .text-gradient {
             background: linear-gradient(135deg, #228a3b, #2ecc71, #1a6f2e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
         .text-gradient-glow {
             background: linear-gradient(135deg, #2ecc71, #228a3b, #2ecc71, #228a3b);
             background-size: 300% 300%;
@@ -263,10 +344,13 @@
             background-clip: text;
             animation: gradientMove 4s ease-in-out infinite;
         }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
         
-        /* ============================================================
-           КАРТОЧКИ
-           ============================================================ */
+        /* ===== КАРТОЧКИ ===== */
         .glass-card {
             background: rgba(0, 0, 0, 0.45);
             backdrop-filter: blur(16px);
@@ -281,7 +365,6 @@
             border-radius: 20px !important;
             will-change: transform;
         }
-        
         .glass-card::after {
             content: '';
             position: absolute;
@@ -294,11 +377,7 @@
             transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
             pointer-events: none;
         }
-        
-        .glass-card:hover::after {
-            transform: scale(1);
-        }
-        
+        .glass-card:hover::after { transform: scale(1); }
         .glass-card:hover {
             transform: translateY(-12px) scale(1.05);
             border-color: rgba(34, 138, 59, 0.35);
@@ -306,9 +385,7 @@
             background: rgba(0, 0, 0, 0.6);
         }
         
-        /* ============================================================
-           РЕСУРСЫ
-           ============================================================ */
+        /* ===== РЕСУРСЫ ===== */
         .resource-card {
             background: rgba(0, 0, 0, 0.45);
             backdrop-filter: blur(16px);
@@ -322,8 +399,10 @@
             height: 100%;
             border-radius: 20px !important;
             will-change: transform;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
         }
-        
         .resource-card::before {
             content: '';
             position: absolute;
@@ -333,11 +412,7 @@
             transition: opacity 0.6s ease;
             border-radius: 20px;
         }
-        
-        .resource-card:hover::before {
-            opacity: 1;
-        }
-        
+        .resource-card:hover::before { opacity: 1; }
         .resource-card:hover {
             transform: translateY(-8px) scale(1.04);
             border-color: rgba(34, 138, 59, 0.3);
@@ -345,20 +420,16 @@
             color: #fff;
             background: rgba(0, 0, 0, 0.6);
         }
-        
         .resource-arrow {
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             flex-shrink: 0;
         }
-        
         .resource-card:hover .resource-arrow {
             transform: translateX(12px) scale(1.15);
             opacity: 1 !important;
         }
         
-        /* ============================================================
-           КНОПКИ
-           ============================================================ */
+        /* ===== КНОПКИ ===== */
         .btn-green {
             background: linear-gradient(135deg, #228a3b, #1a6f2e);
             border: none;
@@ -369,7 +440,6 @@
             border-radius: 50px !important;
             will-change: transform;
         }
-        
         .btn-green::before {
             content: '';
             position: absolute;
@@ -379,26 +449,14 @@
             transition: opacity 0.5s ease;
             border-radius: 50px;
         }
-        
-        .btn-green:hover::before {
-            opacity: 1;
-        }
-        
-        .btn-green span,
-        .btn-green i {
-            position: relative;
-            z-index: 1;
-        }
-        
+        .btn-green:hover::before { opacity: 1; }
+        .btn-green span, .btn-green i { position: relative; z-index: 1; }
         .btn-green:hover {
             transform: translateY(-4px) scale(1.06);
             box-shadow: 0 20px 60px rgba(34, 138, 59, 0.35);
             color: #fff;
         }
-        
-        .btn-green:active {
-            transform: scale(0.96);
-        }
+        .btn-green:active { transform: scale(0.96); }
         
         .btn-outline-green {
             border: 2px solid rgba(34, 138, 59, 0.4);
@@ -410,7 +468,6 @@
             border-radius: 50px !important;
             will-change: transform;
         }
-        
         .btn-outline-green::before {
             content: '';
             position: absolute;
@@ -421,12 +478,7 @@
             transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             border-radius: 50px;
         }
-        
-        .btn-outline-green:hover::before {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-        
+        .btn-outline-green:hover::before { transform: scaleX(1); transform-origin: left; }
         .btn-outline-green:hover {
             border-color: #2ecc71;
             transform: translateY(-4px) scale(1.06);
@@ -442,7 +494,6 @@
             border-radius: 50px !important;
             will-change: transform;
         }
-        
         .btn-outline-light-green:hover {
             background: rgba(34, 138, 59, 0.15);
             border-color: #2ecc71;
@@ -451,9 +502,7 @@
             color: #fff;
         }
         
-        /* ============================================================
-           НАВИГАЦИЯ
-           ============================================================ */
+        /* ===== НАВИГАЦИЯ ===== */
         .navbar-glass {
             background: rgba(10, 10, 18, 0.5);
             backdrop-filter: blur(24px);
@@ -462,12 +511,10 @@
             transition: all 0.5s ease;
             z-index: 1000;
         }
-        
         .navbar-glass.scrolled {
             background: rgba(10, 10, 18, 0.7);
             border-bottom-color: rgba(34, 138, 59, 0.1);
         }
-        
         .nav-link-custom {
             position: relative;
             color: rgba(255, 255, 255, 0.5) !important;
@@ -480,7 +527,6 @@
             text-transform: uppercase;
             will-change: transform;
         }
-        
         .nav-link-custom::before {
             content: '';
             position: absolute;
@@ -493,36 +539,25 @@
             transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             border-radius: 2px;
         }
-        
         .nav-link-custom:hover::before,
-        .nav-link-custom.active::before {
-            transform: translateX(-50%) scaleX(1);
-        }
-        
+        .nav-link-custom.active::before { transform: translateX(-50%) scaleX(1); }
         .nav-link-custom:hover {
             color: #fff !important;
             background: rgba(34, 138, 59, 0.06);
             transform: translateY(-2px) scale(1.05);
         }
-        
         .nav-link-custom.active {
             color: #fff !important;
             background: rgba(34, 138, 59, 0.1);
         }
-        
         .nav-link-custom i {
             margin-right: 8px;
             font-size: 0.85rem;
             transition: transform 0.4s ease;
         }
+        .nav-link-custom:hover i { transform: scale(1.15) rotate(-5deg); }
         
-        .nav-link-custom:hover i {
-            transform: scale(1.15) rotate(-5deg);
-        }
-        
-        /* ============================================================
-           STEP
-           ============================================================ */
+        /* ===== STEP ===== */
         .step-number {
             font-size: 3rem;
             font-weight: 900;
@@ -534,12 +569,10 @@
             line-height: 1;
             transition: all 0.6s ease;
         }
-        
         .glass-card:hover .step-number {
             opacity: 0.8;
             transform: scale(1.08);
         }
-        
         .step-icon-wrapper {
             width: 64px;
             height: 64px;
@@ -551,24 +584,10 @@
             flex-shrink: 0;
             transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
-        
-        .glass-card:hover .step-icon-wrapper {
-            transform: scale(1.12) rotate(-6deg);
-        }
-        
-        .step-icon-green {
-            background: rgba(34, 138, 59, 0.15);
-            color: #2ecc71;
-        }
-        .step-icon-light {
-            background: rgba(46, 204, 113, 0.15);
-            color: #2ecc71;
-        }
-        .step-icon-dark {
-            background: rgba(26, 111, 46, 0.15);
-            color: #228a3b;
-        }
-        
+        .glass-card:hover .step-icon-wrapper { transform: scale(1.12) rotate(-6deg); }
+        .step-icon-green { background: rgba(34, 138, 59, 0.15); color: #2ecc71; }
+        .step-icon-light { background: rgba(46, 204, 113, 0.15); color: #2ecc71; }
+        .step-icon-dark { background: rgba(26, 111, 46, 0.15); color: #228a3b; }
         .step-badge {
             background: rgba(34, 138, 59, 0.15);
             color: #2ecc71;
@@ -581,16 +600,13 @@
             transition: all 0.4s ease;
             white-space: nowrap;
         }
-        
         .glass-card:hover .step-badge {
             background: rgba(34, 138, 59, 0.25);
             color: #2ecc71;
             transform: scale(1.06);
         }
         
-        /* ============================================================
-           FINAL
-           ============================================================ */
+        /* ===== FINAL ===== */
         .final-card {
             background: rgba(0, 0, 0, 0.45);
             border: 1px solid rgba(34, 138, 59, 0.12);
@@ -600,14 +616,12 @@
             border-radius: 20px !important;
             will-change: transform;
         }
-        
         .final-card:hover {
             border-color: rgba(34, 138, 59, 0.3);
             box-shadow: 0 20px 60px rgba(34, 138, 59, 0.08);
             transform: scale(1.03);
             background: rgba(0, 0, 0, 0.6);
         }
-        
         .final-badge {
             background: rgba(34, 138, 59, 0.15);
             color: #2ecc71;
@@ -617,14 +631,9 @@
             font-weight: 600;
             transition: all 0.3s ease;
         }
+        .final-card:hover .final-badge { transform: scale(1.05); }
         
-        .final-card:hover .final-badge {
-            transform: scale(1.05);
-        }
-        
-        /* ============================================================
-           ALERTS
-           ============================================================ */
+        /* ===== ALERTS ===== */
         .alert-glow-danger,
         .alert-glow-warning {
             background: rgba(0, 0, 0, 0.45);
@@ -635,23 +644,15 @@
             height: 100%;
             will-change: transform;
         }
-        
         .alert-glow-danger:hover,
         .alert-glow-warning:hover {
             transform: translateY(-5px) scale(1.03);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
         }
+        .alert-glow-danger { border: 1px solid rgba(239, 68, 68, 0.15); }
+        .alert-glow-warning { border: 1px solid rgba(245, 158, 11, 0.15); }
         
-        .alert-glow-danger {
-            border: 1px solid rgba(239, 68, 68, 0.15);
-        }
-        .alert-glow-warning {
-            border: 1px solid rgba(245, 158, 11, 0.15);
-        }
-        
-        /* ============================================================
-           БЭЙДЖИ
-           ============================================================ */
+        /* ===== БЭЙДЖИ ===== */
         .badge-server {
             background: rgba(34, 138, 59, 0.2) !important;
             color: #2ecc71 !important;
@@ -664,13 +665,11 @@
             display: inline-block;
             will-change: transform;
         }
-        
         .badge-server:hover {
             transform: scale(1.08);
             background: rgba(34, 138, 59, 0.3) !important;
             box-shadow: 0 8px 30px rgba(34, 138, 59, 0.2);
         }
-        
         .badge-base {
             background: rgba(34, 138, 59, 0.2) !important;
             color: #2ecc71 !important;
@@ -684,15 +683,12 @@
             display: inline-block;
             will-change: transform;
         }
-        
         .badge-base:hover {
             transform: scale(1.05);
             background: rgba(34, 138, 59, 0.3) !important;
         }
         
-        /* ============================================================
-           ИКОНКИ
-           ============================================================ */
+        /* ===== ИКОНКИ ===== */
         .icon-box {
             width: 50px;
             height: 50px;
@@ -704,19 +700,9 @@
             flex-shrink: 0;
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
-        
-        .resource-card:hover .icon-box {
-            transform: scale(1.12) rotate(-8deg);
-        }
-        
-        .icon-discord {
-            background: rgba(88, 101, 242, 0.15);
-            color: #818cf8;
-        }
-        .icon-mvd {
-            background: rgba(239, 68, 68, 0.12);
-            color: #f87171;
-        }
+        .resource-card:hover .icon-box { transform: scale(1.12) rotate(-8deg); }
+        .icon-discord { background: rgba(88, 101, 242, 0.15); color: #818cf8; }
+        .icon-mvd { background: rgba(239, 68, 68, 0.12); color: #f87171; }
         
         .code-block {
             background: rgba(0, 0, 0, 0.5);
@@ -728,37 +714,23 @@
             word-break: break-all;
             transition: all 0.4s ease;
         }
-        
         .glass-card:hover .code-block {
             border-color: rgba(34, 138, 59, 0.15);
             transform: scale(1.02);
         }
         
-        /* ============================================================
-           ОБЩЕЕ
-           ============================================================ */
+        /* ===== ОБЩЕЕ ===== */
         .section-title {
             font-size: 2.8rem;
             font-weight: 900;
             letter-spacing: 3px;
             text-transform: uppercase;
         }
+        .anchor-offset { scroll-margin-top: 80px; }
+        .section-bg { position: relative; z-index: 1; }
         
-        .anchor-offset {
-            scroll-margin-top: 80px;
-        }
-        
-        .section-bg {
-            position: relative;
-            z-index: 1;
-        }
-        
-        ::-webkit-scrollbar {
-            width: 5px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0a0a12;
-        }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #0a0a12; }
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(180deg, #228a3b, #2ecc71);
             border-radius: 10px;
@@ -767,14 +739,11 @@
             background: linear-gradient(180deg, #2ecc71, #228a3b);
         }
         
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 992px) {
             .section-title { font-size: 2.2rem; }
             #globalGlow { width: 400px; height: 400px; }
         }
-        
         @media (max-width: 768px) {
             .section-title { font-size: 1.8rem; letter-spacing: 1px; }
             .display-3 { font-size: 2.5rem !important; }
@@ -782,8 +751,8 @@
             .hero-section::before { filter: blur(4px) brightness(0.8); }
             .glass-card { padding: 20px !important; }
             #globalGlow { width: 300px; height: 300px; }
+            .typewriter-text { font-size: 1rem; }
         }
-        
         @media (max-width: 576px) {
             .display-3 { font-size: 2rem !important; }
             .nav-link-custom {
@@ -791,8 +760,7 @@
                 padding: 6px 12px !important;
                 letter-spacing: 0.3px;
             }
-            .btn-green,
-            .btn-outline-green {
+            .btn-green, .btn-outline-green {
                 width: 100%;
                 justify-content: center;
             }
@@ -800,9 +768,11 @@
             .hero-section::before { filter: blur(6px) brightness(0.75); }
             .step-icon-wrapper { width: 48px; height: 48px; font-size: 1.3rem; }
             .step-number { font-size: 1.8rem; }
-            .badge-server,
-            .badge-base { font-size: 0.7rem; padding: 4px 12px; }
+            .badge-server, .badge-base { font-size: 0.7rem; padding: 4px 12px; }
             #globalGlow { width: 200px; height: 200px; opacity: 0.6; }
+            .discord-modal { padding: 25px; }
+            .discord-modal-icon { font-size: 3rem; }
+            #backToTop { width: 40px; height: 40px; font-size: 1rem; bottom: 20px; right: 20px; }
         }
     </style>
 </head>
@@ -812,19 +782,49 @@
     <div id="preloader">
         <div class="preloader-content">
             <div class="preloader-logo">REX <span>RP</span></div>
-            <div class="preloader-spinner"></div>
-            <div class="preloader-progress">
-                <div class="preloader-progress-bar" id="progressBar"></div>
+            <div class="preloader-particles-container">
+                <div class="preloader-particle"></div>
+                <div class="preloader-particle"></div>
+                <div class="preloader-particle"></div>
+                <div class="preloader-particle"></div>
+                <div class="preloader-particle"></div>
+                <div class="preloader-particle"></div>
+                <div class="preloader-particle"></div>
             </div>
             <p class="preloader-text">Загрузка...</p>
         </div>
     </div>
 
-    <!-- ===== ГЛОБАЛЬНЫЙ СВЕТ ЗА КУРСОРОМ ===== -->
+    <!-- ===== СВЕТ ЗА КУРСОРОМ ===== -->
     <div id="globalGlow"></div>
 
-    <!-- ===== ЧАСТИЦЫ НА ФОНЕ ===== -->
+    <!-- ===== ЧАСТИЦЫ ===== -->
     <canvas id="particlesCanvas"></canvas>
+
+    <!-- ===== КНОПКА "НАВЕРХ" ===== -->
+    <button id="backToTop" title="Наверх"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- ===== DISCORD ПОПАП (ОСНОВНОЙ) ===== -->
+    <div class="discord-modal-overlay" id="discordModal">
+        <div class="discord-modal">
+            <button class="discord-modal-close" id="discordModalClose"><i class="fas fa-times"></i></button>
+            <div class="discord-modal-icon discord-blue"><i class="fab fa-discord"></i></div>
+            <h3>Присоединяйся к нам!</h3>
+            <p>Общайся с комьюнити, узнавай новости, получай техподдержку и участвуй в обзвонах на лидерство.</p>
+            <a href="https://dsc.gg/rexrp" target="_blank" class="btn-discord-join discord-blue-btn"><i class="fab fa-discord me-2"></i> Перейти в Discord</a>
+        </div>
+    </div>
+
+    <!-- ===== DISCORD ПОПАП (МВД) ===== -->
+    <div class="discord-modal-overlay" id="discordModalMVD">
+        <div class="discord-modal">
+            <button class="discord-modal-close" id="discordModalCloseMVD"><i class="fas fa-times"></i></button>
+            <div class="discord-modal-icon mvd-red"><i class="fas fa-shield-halved"></i></div>
+            <h3>Портал МВД</h3>
+            <p>Уставы, УК РФ, КоАП, ФЗоП, академия и отчётность для сотрудников фракции. Присоединяйся к нашему Discord-серверу!</p>
+            <a href="https://dsc.gg/rexrpmvd" target="_blank" class="btn-discord-join mvd-red-btn"><i class="fas fa-shield-halved me-2"></i> Перейти в Discord МВД</a>
+        </div>
+    </div>
 
     <!-- ===== НАВИГАЦИЯ ===== -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-glass" id="mainNav">
@@ -852,11 +852,16 @@
             <div class="row">
                 <div class="col-lg-8">
                     <span class="badge-base mb-3 d-inline-block"><i class="fas fa-gamepad me-2"></i> База Radmir Online</span>
-                    <h1 class="display-3 fw-bold text-white mb-4">ДОБРО ПОЖАЛОВАТЬ <br>НА <span class="text-gradient-glow">REX ROLEPLAY</span></h1>
-                    <p class="fs-5 text-white-50 mb-4" style="max-width: 600px; line-height: 1.8;">REX RP — уникальный игровой сервер на платформе Radmir CRMP. Погрузись в проработанный мир криминальной и городской романтики СНГ. Настрой подключение за пару минут по нашей инструкции.</p>
+                    <h1 class="display-3 fw-bold text-white mb-3">ДОБРО ПОЖАЛОВАТЬ <br>НА <span class="text-gradient-glow">REX ROLEPLAY</span></h1>
+                    <div class="typewriter-container mb-4">
+                        <span class="typewriter-text" id="typewriterText"></span>
+                    </div>
+                    <p class="fs-5 text-white-50 mb-4" style="max-width: 600px; line-height: 1.8;">
+                        REX RP — уникальный игровой сервер на платформе Radmir CRMP. Погрузись в проработанный мир криминальной и городской романтики СНГ. Настрой подключение за пару минут по нашей инструкции.
+                    </p>
                     <div class="d-flex flex-wrap gap-3">
                         <a href="#howto" class="btn btn-green btn-lg px-5 py-3 fw-bold text-uppercase"><i class="fas fa-download me-2"></i> <span>Начать установку</span></a>
-                        <a href="https://dsc.gg/rexrp" target="_blank" class="btn btn-outline-green btn-lg px-5 py-3 fw-bold text-uppercase"><i class="fab fa-discord me-2"></i> Наш Discord</a>
+                        <button class="btn btn-outline-green btn-lg px-5 py-3 fw-bold text-uppercase" id="discordModalOpen"><i class="fab fa-discord me-2"></i> Наш Discord</button>
                     </div>
                 </div>
             </div>
@@ -977,7 +982,7 @@
             </div>
             <div class="row g-4 justify-content-center">
                 <div class="col-12 col-md-6">
-                    <a href="https://dsc.gg/rexrp" target="_blank" class="resource-card rounded-4 p-4">
+                    <button class="resource-card rounded-4 p-4" id="discordModalOpen2">
                         <div class="d-flex align-items-center gap-3">
                             <div class="icon-box icon-discord flex-shrink-0"><i class="fab fa-discord"></i></div>
                             <div class="flex-grow-1 min-width-0">
@@ -986,10 +991,10 @@
                             </div>
                             <span class="fs-2 text-white-50 opacity-25 resource-arrow">→</span>
                         </div>
-                    </a>
+                    </button>
                 </div>
                 <div class="col-12 col-md-6">
-                    <a href="https://dsc.gg/rexrpmvd" target="_blank" class="resource-card rounded-4 p-4">
+                    <button class="resource-card rounded-4 p-4" id="discordModalOpenMVD">
                         <div class="d-flex align-items-center gap-3">
                             <div class="icon-box icon-mvd flex-shrink-0"><i class="fas fa-shield-halved"></i></div>
                             <div class="flex-grow-1 min-width-0">
@@ -998,14 +1003,14 @@
                             </div>
                             <span class="fs-2 text-white-50 opacity-25 resource-arrow">→</span>
                         </div>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ===== ФУТЕР ===== -->
-    <footer class="py-4 text-center border-top" style="background: rgba(10, 10, 18, 0.4); border-color: rgba(255,255,255,0.03) !important; backdrop-filter: blur(10px); position: relative; z-index: 1;">
+    <footer class="py-4 text-center border-top" style="background: rgba(10, 10, 18, 0.4); border-color: rgba(255, 255, 255, 0.03) !important; backdrop-filter: blur(10px); position: relative; z-index: 1;">
         <div class="container"><p class="text-white-50 mb-0 small">&copy; 2026 REX RP. Сайт-инструкция игрового сервера на базе Radmir Online.</p></div>
     </footer>
 
@@ -1014,36 +1019,54 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // ============================================================
-            // 1. ПРЕЛОАДЕР
-            // ============================================================
+            // ===== ПРЕЛОАДЕР =====
             const preloader = document.getElementById('preloader');
-            const progressBar = document.getElementById('progressBar');
-            let progress = 0;
-            
-            const interval = setInterval(() => {
-                progress += Math.random() * 10 + 5;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        preloader.classList.add('hidden');
-                    }, 300);
-                }
-                progressBar.style.width = progress + '%';
-            }, 200);
-            
-            window.addEventListener('load', function() {
-                clearInterval(interval);
-                progressBar.style.width = '100%';
-                setTimeout(() => {
-                    preloader.classList.add('hidden');
-                }, 300);
-            });
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+            }, 2500);
 
-            // ============================================================
-            // 2. ГЛОБАЛЬНЫЙ СВЕТ ЗА КУРСОРОМ
-            // ============================================================
+            // ===== ПЕЧАТНАЯ МАШИНКА =====
+            const phrases = [
+                'Создай свою историю в криминальном мире',
+                'Стань лидером банды или бизнесменом',
+                'Участвуй в обзвонах и зарабатывай авторитет',
+                'Строй свою империю на REX RP',
+                'Выбирай свой путь: полиция, мафия или бизнес'
+            ];
+            
+            let currentPhraseIndex = 0;
+            let currentCharIndex = 0;
+            let isDeleting = false;
+            const typewriterElement = document.getElementById('typewriterText');
+            
+            function typeWriter() {
+                const currentPhrase = phrases[currentPhraseIndex];
+                
+                if (isDeleting) {
+                    typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex - 1);
+                    currentCharIndex--;
+                } else {
+                    typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex + 1);
+                    currentCharIndex++;
+                }
+                
+                let speed = isDeleting ? 50 : 100;
+                
+                if (!isDeleting && currentCharIndex === currentPhrase.length) {
+                    speed = 3000;
+                    isDeleting = true;
+                } else if (isDeleting && currentCharIndex === 0) {
+                    isDeleting = false;
+                    currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+                    speed = 500;
+                }
+                
+                setTimeout(typeWriter, speed);
+            }
+            
+            setTimeout(typeWriter, 1000);
+
+            // ===== СВЕТ ЗА КУРСОРОМ =====
             const glow = document.getElementById('globalGlow');
             document.addEventListener('mousemove', function(e) {
                 glow.style.left = e.clientX + 'px';
@@ -1054,9 +1077,7 @@
                 glow.classList.remove('active');
             });
 
-            // ============================================================
-            // 3. ЧАСТИЦЫ НА ФОНЕ
-            // ============================================================
+            // ===== ЧАСТИЦЫ =====
             const canvas = document.getElementById('particlesCanvas');
             const ctx = canvas.getContext('2d');
             let width, height;
@@ -1114,9 +1135,68 @@
             }
             animateParticles();
 
-            // ============================================================
-            // 4. ПЛАВНАЯ ПРОКРУТКА
-            // ============================================================
+            // ===== КНОПКА "НАВЕРХ" =====
+            const backToTop = document.getElementById('backToTop');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // ===== DISCORD ПОПАП (ОСНОВНОЙ) =====
+            const discordModal = document.getElementById('discordModal');
+            const discordModalOpen = document.getElementById('discordModalOpen');
+            const discordModalOpen2 = document.getElementById('discordModalOpen2');
+            const discordModalClose = document.getElementById('discordModalClose');
+
+            function openDiscordModal() {
+                discordModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeDiscordModal() {
+                discordModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            discordModalOpen.addEventListener('click', openDiscordModal);
+            discordModalOpen2.addEventListener('click', openDiscordModal);
+            discordModalClose.addEventListener('click', closeDiscordModal);
+            discordModal.addEventListener('click', function(e) {
+                if (e.target === this) closeDiscordModal();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeDiscordModal();
+            });
+
+            // ===== DISCORD ПОПАП (МВД) =====
+            const discordModalMVD = document.getElementById('discordModalMVD');
+            const discordModalOpenMVD = document.getElementById('discordModalOpenMVD');
+            const discordModalCloseMVD = document.getElementById('discordModalCloseMVD');
+
+            function openDiscordModalMVD() {
+                discordModalMVD.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeDiscordModalMVD() {
+                discordModalMVD.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            discordModalOpenMVD.addEventListener('click', openDiscordModalMVD);
+            discordModalCloseMVD.addEventListener('click', closeDiscordModalMVD);
+            discordModalMVD.addEventListener('click', function(e) {
+                if (e.target === this) closeDiscordModalMVD();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeDiscordModalMVD();
+            });
+
+            // ===== ПЛАВНАЯ ПРОКРУТКА =====
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     const targetId = this.getAttribute('href');
@@ -1131,9 +1211,7 @@
                 });
             });
 
-            // ============================================================
-            // 5. ПОДСВЕТКА АКТИВНОЙ ССЫЛКИ
-            // ============================================================
+            // ===== ПОДСВЕТКА АКТИВНОЙ ССЫЛКИ =====
             const sections = document.querySelectorAll('.anchor-offset');
             const navLinks = document.querySelectorAll('.nav-link-custom');
             window.addEventListener('scroll', function() {
@@ -1152,9 +1230,7 @@
                 else navbar.classList.remove('scrolled');
             });
 
-            // ============================================================
-            // 6. ПЛАВНОЕ ПОЯВЛЕНИЕ ЭЛЕМЕНТОВ
-            // ============================================================
+            // ===== ПЛАВНОЕ ПОЯВЛЕНИЕ =====
             const elements = document.querySelectorAll('.glass-card, .resource-card, .final-card, .alert-glow-danger, .alert-glow-warning');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
