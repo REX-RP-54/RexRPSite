@@ -3,20 +3,782 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REX RP | Главная</title>
+    <title>REX RP | Инструкция по подключению</title>
     
     <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/REX-RP-54/RexRPSite/refs/heads/assets/Favicon.svg">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/REX-RP-54/RexRPSite/refs/heads/assets/Favicon.svg">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Geologica', sans-serif;
+            background: #0a0a12;
+            padding-top: 76px;
+            overflow-x: hidden;
+            cursor: default;
+            color: #fff;
+        }
+        :root {
+            --primary: #228a3b;
+            --primary-light: #2ecc71;
+            --primary-dark: #1a6f2e;
+        }
+        
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: #0a0a12;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #preloader.hidden { opacity: 0; visibility: hidden; }
+        .preloader-content { text-align: center; }
+        .preloader-logo {
+            font-family: 'Geologica', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, #228a3b, #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: preloaderFade 1s ease forwards;
+        }
+        .preloader-logo span {
+            background: linear-gradient(135deg, #2ecc71, #228a3b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        @keyframes preloaderFade {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .preloader-particles-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+        .preloader-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #2ecc71;
+            border-radius: 50%;
+            animation: particleFloat 2s ease-in-out infinite;
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.5);
+        }
+        .preloader-particle:nth-child(1) { top: 0%; left: 50%; animation-delay: 0s; }
+        .preloader-particle:nth-child(2) { top: 25%; left: 85%; animation-delay: 0.2s; }
+        .preloader-particle:nth-child(3) { top: 75%; left: 85%; animation-delay: 0.4s; }
+        .preloader-particle:nth-child(4) { top: 100%; left: 50%; animation-delay: 0.6s; }
+        .preloader-particle:nth-child(5) { top: 75%; left: 15%; animation-delay: 0.8s; }
+        .preloader-particle:nth-child(6) { top: 25%; left: 15%; animation-delay: 1s; }
+        .preloader-particle:nth-child(7) { top: 50%; left: 50%; animation-delay: 0.3s; width: 12px; height: 12px; background: #228a3b; }
+        @keyframes particleFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(0, -20px) scale(1.3); }
+        }
+        .preloader-text {
+            color: rgba(255,255,255,0.3);
+            font-family: 'Geologica', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        #globalGlow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(34,138,59,0.12), rgba(46,204,113,0.05), transparent 70%);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            mix-blend-mode: screen;
+        }
+        #globalGlow.active { opacity: 1; }
+        
+        #particlesCanvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .hero-section {
+            min-height: calc(100vh - 76px);
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: rgba(10,10,18,0.2);
+            overflow: hidden;
+            z-index: 1;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(10,10,18,0.2) 0%, rgba(10,10,18,0.5) 100%),
+                url('https://raw.githubusercontent.com/REX-RP-54/RexRPSite/refs/heads/assets/Site.png') center/cover no-repeat;
+            filter: blur(2px) brightness(0.85);
+            z-index: 0;
+            animation: heroFloat 25s ease-in-out infinite alternate;
+            transition: all 0.8s ease;
+        }
+        .hero-section:hover::before { filter: blur(2px) brightness(1.0); }
+        @keyframes heroFloat {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.05) rotate(0.5deg); }
+        }
+        .hero-overlay-light {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(10,10,18,0.3) 0%, transparent 50%, rgba(10,10,18,0.2) 100%);
+            z-index: 0;
+            transition: all 0.8s ease;
+        }
+        .hero-section:hover .hero-overlay-light {
+            background: linear-gradient(135deg, rgba(10,10,18,0.1) 0%, transparent 50%, rgba(10,10,18,0.05) 100%);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1.2s cubic-bezier(0.23,1,0.32,1) forwards;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(60px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .typewriter-container { min-height: 60px; }
+        .typewriter-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2ecc71;
+            border-right: 2px solid #2ecc71;
+            padding-right: 5px;
+            animation: blink 0.8s step-end infinite;
+        }
+        @keyframes blink {
+            0%, 100% { border-color: #2ecc71; }
+            50% { border-color: transparent; }
+        }
+        
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #228a3b, #1a6f2e);
+            border: none;
+            color: #fff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
+            box-shadow: 0 4px 20px rgba(34,138,59,0.3);
+        }
+        #backToTop.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        #backToTop:hover {
+            transform: translateY(-4px) scale(1.1);
+            box-shadow: 0 8px 40px rgba(34,138,59,0.5);
+        }
+        
+        .discord-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        .discord-modal-overlay.active { opacity: 1; visibility: visible; }
+        .discord-modal {
+            background: rgba(20,20,40,0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(34,138,59,0.2);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 480px;
+            width: 90%;
+            text-align: center;
+            transform: scale(0.9) translateY(30px);
+            transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
+            position: relative;
+            animation: modalIn 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.9) translateY(-30px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .discord-modal-overlay.active .discord-modal { transform: scale(1) translateY(0); }
+        .discord-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.3);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .discord-modal-close:hover { color: #fff; transform: rotate(90deg); }
+        .discord-modal-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+        .discord-modal-icon.discord-blue { color: #5865F2; }
+        .discord-modal-icon.mvd-red { color: #ef4444; }
+        .discord-modal h3 { color: #fff; font-weight: 800; margin-bottom: 10px; }
+        .discord-modal p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        .discord-modal .btn-discord-join {
+            border: none;
+            color: #fff;
+            padding: 12px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .discord-modal .btn-discord-join.discord-blue-btn { background: #5865F2; }
+        .discord-modal .btn-discord-join.discord-blue-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 40px rgba(88,101,242,0.3);
+            color: #fff;
+        }
+        .discord-modal .btn-discord-join.mvd-red-btn { background: #dc2626; }
+        .discord-modal .btn-discord-join.mvd-red-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 40px rgba(220,38,38,0.3);
+            color: #fff;
+        }
+        .discord-modal .btn-discord-join.tiktok-black-btn { background: #000; }
+        .discord-modal .btn-discord-join.tiktok-black-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            color: #fff;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #228a3b, #2ecc71, #1a6f2e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .text-gradient-glow {
+            background: linear-gradient(135deg, #2ecc71, #228a3b, #2ecc71, #228a3b);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientMove 4s ease-in-out infinite;
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .glass-card {
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(34,138,59,0.1);
+            transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border-radius: 20px !important;
+        }
+        .glass-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(34,138,59,0.06), transparent 70%);
+            transform: scale(0);
+            transition: transform 0.8s cubic-bezier(0.23,1,0.32,1);
+            pointer-events: none;
+        }
+        .glass-card:hover::after { transform: scale(1); }
+        .glass-card:hover {
+            transform: translateY(-12px) scale(1.05);
+            border-color: rgba(34,138,59,0.35);
+            box-shadow: 0 30px 80px rgba(34,138,59,0.15);
+            background: rgba(0,0,0,0.6);
+        }
+        
+        .resource-card {
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(34,138,59,0.08);
+            transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
+            color: #fff;
+            position: relative;
+            display: block;
+            height: 100%;
+            border-radius: 20px !important;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            text-decoration: none;
+        }
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(34,138,59,0.05), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            border-radius: 20px;
+        }
+        .resource-card:hover::before { opacity: 1; }
+        .resource-card:hover {
+            transform: translateY(-8px) scale(1.04);
+            border-color: rgba(34,138,59,0.3);
+            box-shadow: 0 25px 60px rgba(34,138,59,0.1);
+            color: #fff;
+            background: rgba(0,0,0,0.6);
+        }
+        .resource-arrow {
+            transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
+            flex-shrink: 0;
+        }
+        .resource-card:hover .resource-arrow {
+            transform: translateX(12px) scale(1.15);
+            opacity: 1 !important;
+        }
+        
+        .step-icon-large {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto;
+            background: rgba(34, 138, 59, 0.15);
+            color: #2ecc71;
+            transition: all 0.4s ease;
+        }
+        .step-card:hover .step-icon-large {
+            transform: scale(1.1) rotate(-6deg);
+            background: rgba(34, 138, 59, 0.25);
+            box-shadow: 0 0 40px rgba(46, 204, 113, 0.2);
+        }
+        .step-icon-green { background: rgba(34,138,59,0.15); color: #2ecc71; }
+        .step-icon-light { background: rgba(46,204,113,0.15); color: #2ecc71; }
+        .step-icon-dark { background: rgba(26,111,46,0.15); color: #228a3b; }
+        
+        .btn-green {
+            background: linear-gradient(135deg, #228a3b, #1a6f2e);
+            border: none;
+            color: #fff;
+            transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 50px !important;
+        }
+        .btn-green::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #2ecc71, #228a3b);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            border-radius: 50px;
+        }
+        .btn-green:hover::before { opacity: 1; }
+        .btn-green span, .btn-green i { position: relative; z-index: 1; }
+        .btn-green:hover {
+            transform: translateY(-4px) scale(1.06);
+            box-shadow: 0 20px 60px rgba(34,138,59,0.35);
+            color: #fff;
+        }
+        .btn-green:active { transform: scale(0.96); }
+        
+        .btn-outline-green {
+            border: 2px solid rgba(34,138,59,0.4);
+            color: #fff;
+            background: transparent;
+            transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 50px !important;
+        }
+        .btn-outline-green::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(34,138,59,0.1);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.5s cubic-bezier(0.23,1,0.32,1);
+            border-radius: 50px;
+        }
+        .btn-outline-green:hover::before { transform: scaleX(1); transform-origin: left; }
+        .btn-outline-green:hover {
+            border-color: #2ecc71;
+            transform: translateY(-4px) scale(1.06);
+            box-shadow: 0 20px 60px rgba(34,138,59,0.15);
+            color: #fff;
+        }
+        
+        .btn-outline-light-green {
+            border: 1px solid rgba(34,138,59,0.25);
+            color: #fff;
+            background: transparent;
+            transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
+            border-radius: 50px !important;
+        }
+        .btn-outline-light-green:hover {
+            background: rgba(34,138,59,0.15);
+            border-color: #2ecc71;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(34,138,59,0.12);
+            color: #fff;
+        }
+        
+        .navbar-glass {
+            background: rgba(10,10,18,0.5);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(34,138,59,0.05);
+            transition: all 0.5s ease;
+            z-index: 1000;
+        }
+        .navbar-glass.scrolled {
+            background: rgba(10,10,18,0.7);
+            border-bottom-color: rgba(34,138,59,0.1);
+        }
+        .nav-link-custom {
+            position: relative;
+            color: rgba(255,255,255,0.5) !important;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.8px;
+            padding: 8px 20px !important;
+            border-radius: 50px !important;
+            transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
+            text-transform: uppercase;
+        }
+        .nav-link-custom::before {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(90deg, #228a3b, #2ecc71);
+            transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
+            border-radius: 2px;
+        }
+        .nav-link-custom:hover::before,
+        .nav-link-custom.active::before { transform: translateX(-50%) scaleX(1); }
+        .nav-link-custom:hover {
+            color: #fff !important;
+            background: rgba(34,138,59,0.06);
+            transform: translateY(-2px) scale(1.05);
+        }
+        .nav-link-custom.active {
+            color: #fff !important;
+            background: rgba(34,138,59,0.1);
+        }
+        .nav-link-custom i {
+            margin-right: 8px;
+            font-size: 0.85rem;
+            transition: transform 0.4s ease;
+        }
+        .nav-link-custom:hover i { transform: scale(1.15) rotate(-5deg); }
+        
+        .step-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #228a3b, #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0.4;
+            line-height: 1;
+            transition: all 0.6s ease;
+        }
+        .glass-card:hover .step-number {
+            opacity: 0.8;
+            transform: scale(1.08);
+        }
+        .step-badge {
+            background: rgba(34,138,59,0.15);
+            color: #2ecc71;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 50px !important;
+            text-transform: uppercase;
+            border: 1px solid rgba(34,138,59,0.08);
+            transition: all 0.4s ease;
+            white-space: nowrap;
+        }
+        .glass-card:hover .step-badge {
+            background: rgba(34,138,59,0.25);
+            color: #2ecc71;
+            transform: scale(1.06);
+        }
+        
+        .final-card {
+            background: rgba(0,0,0,0.45);
+            border: 1px solid rgba(34,138,59,0.12);
+            backdrop-filter: blur(16px);
+            transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
+            border-radius: 20px !important;
+        }
+        .final-card:hover {
+            border-color: rgba(34,138,59,0.3);
+            box-shadow: 0 20px 60px rgba(34,138,59,0.08);
+            transform: scale(1.03);
+            background: rgba(0,0,0,0.6);
+        }
+        .final-badge {
+            background: rgba(34,138,59,0.15);
+            color: #2ecc71;
+            padding: 4px 16px;
+            border-radius: 50px !important;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .final-card:hover .final-badge { transform: scale(1.05); }
+        
+        .alert-glow-danger,
+        .alert-glow-warning {
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(12px);
+            border-radius: 16px !important;
+            transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
+            height: 100%;
+        }
+        .alert-glow-danger:hover,
+        .alert-glow-warning:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+        .alert-glow-danger { border: 1px solid rgba(239,68,68,0.15); }
+        .alert-glow-warning { border: 1px solid rgba(245,158,11,0.15); }
+        
+        .badge-server {
+            background: rgba(34,138,59,0.2) !important;
+            color: #2ecc71 !important;
+            border: 1px solid rgba(34,138,59,0.2);
+            padding: 6px 16px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border-radius: 50px !important;
+            transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
+            display: inline-block;
+        }
+        .badge-server:hover {
+            transform: scale(1.08);
+            background: rgba(34,138,59,0.3) !important;
+            box-shadow: 0 8px 30px rgba(34,138,59,0.2);
+        }
+        .badge-base {
+            background: rgba(34,138,59,0.2) !important;
+            color: #2ecc71 !important;
+            border: 1px solid rgba(34,138,59,0.15);
+            padding: 8px 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            border-radius: 50px !important;
+            transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
+            display: inline-block;
+        }
+        .badge-base:hover {
+            transform: scale(1.05);
+            background: rgba(34,138,59,0.3) !important;
+        }
+        
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
+        }
+        .resource-card:hover .icon-box { transform: scale(1.12) rotate(-8deg); }
+        .icon-discord { background: rgba(88,101,242,0.15); color: #818cf8; }
+        .icon-mvd { background: rgba(239,68,68,0.12); color: #f87171; }
+        .icon-tiktok { background: rgba(0,0,0,0.15); color: #fff; }
+        
+        .code-block {
+            background: rgba(0,0,0,0.5);
+            color: #fcd34d;
+            font-size: 0.7rem;
+            padding: 8px 12px;
+            border-radius: 10px !important;
+            border: 1px solid rgba(255,255,255,0.05);
+            word-break: break-all;
+            transition: all 0.4s ease;
+        }
+        .glass-card:hover .code-block {
+            border-color: rgba(34,138,59,0.15);
+            transform: scale(1.02);
+        }
+        
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        .anchor-offset { scroll-margin-top: 80px; }
+        .section-bg { position: relative; z-index: 1; }
+        
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #0a0a12; }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #228a3b, #2ecc71);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #2ecc71, #228a3b);
+        }
+        
+        @media (max-width: 992px) {
+            .section-title { font-size: 2.2rem; }
+            #globalGlow { width: 400px; height: 400px; }
+        }
+        @media (max-width: 768px) {
+            .section-title { font-size: 1.8rem; letter-spacing: 1px; }
+            .display-3 { font-size: 2.5rem !important; }
+            .step-number { font-size: 2.2rem; }
+            .hero-section::before { filter: blur(4px) brightness(0.8); }
+            .glass-card { padding: 20px !important; }
+            #globalGlow { width: 300px; height: 300px; }
+            .typewriter-text { font-size: 1rem; }
+        }
+        @media (max-width: 576px) {
+            .display-3 { font-size: 2rem !important; }
+            .nav-link-custom {
+                font-size: 0.75rem;
+                padding: 6px 12px !important;
+                letter-spacing: 0.3px;
+            }
+            .btn-green, .btn-outline-green {
+                width: 100%;
+                justify-content: center;
+            }
+            .d-flex.flex-wrap.gap-3 { flex-direction: column; }
+            .hero-section::before { filter: blur(6px) brightness(0.75); }
+            .step-icon-wrapper { width: 48px; height: 48px; font-size: 1.3rem; }
+            .step-number { font-size: 1.8rem; }
+            .badge-server, .badge-base { font-size: 0.7rem; padding: 4px 12px; }
+            #globalGlow { width: 200px; height: 200px; opacity: 0.6; }
+            .discord-modal { padding: 25px; }
+            .discord-modal-icon { font-size: 3rem; }
+            #backToTop { width: 40px; height: 40px; font-size: 1rem; bottom: 20px; right: 20px; }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- НАВИГАЦИЯ (ОБЩАЯ ДЛЯ ВСЕХ СТРАНИЦ) -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-glass">
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">REX <span>RP</span></div>
+            <div class="preloader-particles-container">
+                <div class="preloader-particle"></div>
+                <div class="preloader-particle"></div>
+                <div class="preloader-particle"></div>
+                <div class="preloader-particle"></div>
+                <div class="preloader-particle"></div>
+                <div class="preloader-particle"></div>
+                <div class="preloader-particle"></div>
+            </div>
+            <p class="preloader-text">Загрузка...</p>
+        </div>
+    </div>
+
+    <div id="globalGlow"></div>
+    <canvas id="particlesCanvas"></canvas>
+    <button id="backToTop" title="Наверх"><i class="fas fa-arrow-up"></i></button>
+
+    <div class="discord-modal-overlay" id="discordModal">
+        <div class="discord-modal">
+            <button class="discord-modal-close" id="discordModalClose"><i class="fas fa-times"></i></button>
+            <div class="discord-modal-icon discord-blue"><i class="fab fa-discord"></i></div>
+            <h3>Присоединяйся к нам!</h3>
+            <p>Общайся с комьюнити, узнавай новости, получай техподдержку и участвуй в обзвонах на лидерство.</p>
+            <a href="https://dsc.gg/rexrp" target="_blank" class="btn-discord-join discord-blue-btn"><i class="fab fa-discord me-2"></i> Перейти в Discord</a>
+        </div>
+    </div>
+
+    <div class="discord-modal-overlay" id="discordModalMVD">
+        <div class="discord-modal">
+            <button class="discord-modal-close" id="discordModalCloseMVD"><i class="fas fa-times"></i></button>
+            <div class="discord-modal-icon mvd-red"><i class="fas fa-shield-halved"></i></div>
+            <h3>Портал МВД</h3>
+            <p>Уставы, УК РФ, КоАП, ФЗоП, академия и отчётность для сотрудников фракции. Присоединяйся к нашему Discord-серверу!</p>
+            <a href="https://dsc.gg/rexrpmvd" target="_blank" class="btn-discord-join mvd-red-btn"><i class="fas fa-shield-halved me-2"></i> Перейти в Discord МВД</a>
+        </div>
+    </div>
+
+    <div class="discord-modal-overlay" id="tiktokModal">
+        <div class="discord-modal">
+            <button class="discord-modal-close" id="tiktokModalClose"><i class="fas fa-times"></i></button>
+            <div style="background: #000; color: #fff; border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 3rem;">
+                <i class="fab fa-tiktok"></i>
+            </div>
+            <h3>Наш TikTok</h3>
+            <p>Короткие видео с сервера, мемы, моменты из игры и не только. Подписывайся!</p>
+            <a href="https://www.tiktok.com/@rexrpradmir" target="_blank" class="btn-discord-join" style="background: #000;"><i class="fab fa-tiktok me-2"></i> Перейти в TikTok</a>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-glass" id="mainNav">
         <div class="container">
-            <a class="navbar-brand fw-bold fs-2" href="index.html">
+            <a class="navbar-brand fw-bold fs-2" href="#">
                 <span class="text-gradient">REX</span> <span class="text-white">RP</span>
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -24,17 +786,15 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav gap-1 gap-lg-2">
-                    <li class="nav-item"><a class="nav-link nav-link-custom active" href="index.html"><i class="fas fa-home"></i> Главная</a></li>
-                    <li class="nav-item"><a class="nav-link nav-link-custom" href="about.html"><i class="fas fa-info-circle"></i> О проекте</a></li>
-                    <li class="nav-item"><a class="nav-link nav-link-custom" href="instruction.html"><i class="fas fa-play-circle"></i> Инструкция</a></li>
-                    <li class="nav-item"><a class="nav-link nav-link-custom" href="resources.html"><i class="fas fa-link"></i> Ресурсы</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom active" href="#about"><i class="fas fa-info-circle"></i> О проекте</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#howto"><i class="fas fa-play-circle"></i> Инструкция</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#links"><i class="fas fa-link"></i> Ресурсы</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- HERO -->
-    <section class="hero-section">
+    <section class="hero-section anchor-offset" id="about">
         <div class="hero-overlay-light"></div>
         <div class="container hero-content py-5">
             <div class="row">
@@ -48,7 +808,7 @@
                         REX RP — уникальный игровой сервер на платформе Radmir CRMP. Погрузись в проработанный мир криминальной и городской романтики СНГ. Настрой подключение за пару минут по нашей инструкции.
                     </p>
                     <div class="d-flex flex-wrap gap-3">
-                        <a href="instruction.html" class="btn btn-green btn-lg px-5 py-3 fw-bold text-uppercase"><i class="fas fa-download me-2"></i> <span>Начать установку</span></a>
+                        <a href="#howto" class="btn btn-green btn-lg px-5 py-3 fw-bold text-uppercase"><i class="fas fa-download me-2"></i> <span>Начать установку</span></a>
                         <button class="btn btn-outline-green btn-lg px-5 py-3 fw-bold text-uppercase" id="discordModalOpen"><i class="fab fa-discord me-2"></i> Наш Discord</button>
                     </div>
                 </div>
@@ -56,16 +816,122 @@
         </div>
     </section>
 
-    <!-- СЧЁТЧИК ОНЛАЙН -->
-    <section class="py-5" style="background: rgba(10,10,18,0.8);">
-        <div class="container text-center">
-            <h2 class="section-title text-white">ИГРОКОВ <span class="text-gradient">ОНЛАЙН</span></h2>
-            <div class="display-1 fw-bold text-gradient" id="onlineCount">0</div>
-            <p class="text-white-50">Обновляется в реальном времени</p>
+    <section class="py-5 anchor-offset section-bg" id="howto" style="background: rgba(10,10,18,0.4); backdrop-filter: blur(10px);">
+        <div class="container my-4">
+            <div class="text-center mb-5">
+                <h2 class="section-title text-white">КАК ЗАЙТИ НА <span class="text-gradient">СЕРВЕР?</span></h2>
+                <p class="text-white-50 fs-5">Всего 3 простых шага — и ты в игре!</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-12 col-md-4">
+                    <div class="glass-card rounded-4 p-4 step-card">
+                        <div class="step-icon-large step-icon-green"><i class="fas fa-download"></i></div>
+                        <h5 class="fw-bold text-white mt-3 text-center">Установка Radmir</h5>
+                        <p class="text-white-50 small text-center">Скачай официальный лаунчер Radmir Online и установи игру на ПК.</p>
+                        <div class="mt-auto pt-2">
+                            <a href="https://radmir.online/" target="_blank" class="btn btn-outline-light-green btn-sm w-100 py-2 fw-bold"><i class="fas fa-download me-2"></i> Скачать лаунчер</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="glass-card rounded-4 p-4 step-card">
+                        <div class="step-icon-large step-icon-light"><i class="fas fa-file-archive"></i></div>
+                        <h5 class="fw-bold text-white mt-3 text-center">Подготовка коннекта</h5>
+                        <p class="text-white-50 small text-center">Скачай архив, распакуй и нажми <strong class="text-white">«ЗАГРУЗИТЬ»</strong> в лаунчере.</p>
+                        <div class="mt-auto pt-2">
+                            <a href="https://github.com/REX-RP-54/RexRPSite/blob/assets/CONNECT_SERVER.zip?raw=true" target="_blank" class="btn btn-outline-light-green btn-sm w-100 py-2 fw-bold"><i class="fas fa-file-archive me-2"></i> Скачать архив</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="glass-card rounded-4 p-4 step-card" style="border-color: rgba(46,204,113,0.1);">
+                        <div class="step-icon-large step-icon-dark"><i class="fas fa-wrench"></i></div>
+                        <h5 class="fw-bold text-white mt-3 text-center">Установка файлов</h5>
+                        <p class="text-white-50 small text-center">Перенеси файлы в папку с игрой:</p>
+                        <div class="code-block mb-2">C:\Program Files (x86)\RADMIR Games\RADMIR CRMP</div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="final-card rounded-4 p-4">
+                        <div class="row align-items-center">
+                            <div class="col-md-9">
+                                <div class="d-flex align-items-center gap-2 flex-wrap mb-2">
+                                    <span class="final-badge"><i class="fas fa-flag-checkered me-1"></i> ФИНАЛ</span>
+                                    <span class="text-white fw-bold fs-5">Вход на сервер</span>
+                                </div>
+                                <p class="text-white-50 mb-0">В лаунчере выбери <span class="badge-server">17 сервер</span> и нажми <span class="text-white fw-bold">«ИГРАТЬ»</span>. При первом запуске укажи Email, придумай пароль и повтори его.</p>
+                            </div>
+                            <div class="col-md-3 text-md-end mt-3 mt-md-0">
+                                <span class="fs-1 fw-bold" style="background: linear-gradient(135deg, #2ecc71, #228a3b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🎮 Готово!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4 g-3">
+                <div class="col-12 col-md-6">
+                    <div class="alert-glow-danger p-4">
+                        <h5 class="fw-bold text-danger"><i class="fas fa-triangle-exclamation me-2"></i> ВАЖНО ПРИ ЗАГРУЗКЕ!</h5>
+                        <p class="text-white-50 mb-0">Когда идёт загрузка игры, <strong class="text-white">ни в коем случае не сворачивай окно</strong>. Дождись полного подключения, иначе клиент может зависнуть.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="alert-glow-warning p-4">
+                        <h5 class="fw-bold text-warning"><i class="fas fa-rotate me-2"></i> ПОСЛЕ ОБНОВЛЕНИЙ</h5>
+                        <p class="text-white-50 mb-0">После каждого обновления Radmir файлы подключения заменяются стандартными. Тебе нужно снова перенести файлы из архива в папку игры.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- ПОДВАЛ -->
+    <section class="py-5 anchor-offset section-bg" id="links" style="background: rgba(7,7,14,0.4); backdrop-filter: blur(10px);">
+        <div class="container my-4">
+            <div class="text-center mb-5">
+                <h2 class="section-title text-white">РЕСУРСЫ <span class="text-gradient">ПРОЕКТА</span></h2>
+                <p class="text-white-50 fs-5">Всё, что нужно для игры и общения</p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-12 col-md-4">
+                    <button class="resource-card rounded-4 p-4" id="discordModalOpen2">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="icon-box icon-discord flex-shrink-0"><i class="fab fa-discord"></i></div>
+                            <div class="flex-grow-1 min-width-0">
+                                <h5 class="fw-bold text-white mb-1">Официальный Discord</h5>
+                                <p class="text-white-50 mb-0 small">Общение, новости, техподдержка и обзвоны.</p>
+                            </div>
+                            <span class="fs-2 text-white-50 opacity-25 resource-arrow">→</span>
+                        </div>
+                    </button>
+                </div>
+                <div class="col-12 col-md-4">
+                    <button class="resource-card rounded-4 p-4" id="discordModalOpenMVD">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="icon-box icon-mvd flex-shrink-0"><i class="fas fa-shield-halved"></i></div>
+                            <div class="flex-grow-1 min-width-0">
+                                <h5 class="fw-bold text-white mb-1">Портал МВД (Полиция)</h5>
+                                <p class="text-white-50 mb-0 small">Уставы, УК РФ, КоАП, ФЗоП и отчётность.</p>
+                            </div>
+                            <span class="fs-2 text-white-50 opacity-25 resource-arrow">→</span>
+                        </div>
+                    </button>
+                </div>
+                <div class="col-12 col-md-4">
+                    <button class="resource-card rounded-4 p-4" id="tiktokModalOpen">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="icon-box icon-tiktok flex-shrink-0"><i class="fab fa-tiktok"></i></div>
+                            <div class="flex-grow-1 min-width-0">
+                                <h5 class="fw-bold text-white mb-1">TikTok</h5>
+                                <p class="text-white-50 mb-0 small">Короткие видео с сервера, мемы и моменты.</p>
+                            </div>
+                            <span class="fs-2 text-white-50 opacity-25 resource-arrow">→</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer style="background: rgba(10,10,18,0.9); border-top: 2px solid #228a3b; padding: 30px 0;">
         <div class="container">
             <p class="text-white-50 small text-center">&copy; 2026 REX RP. Сайт-инструкция игрового сервера на базе Radmir Online.</p>
@@ -73,6 +939,211 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => { preloader.classList.add('hidden'); }, 2500);
+
+            const phrases = [
+                'Создай свою историю в криминальном мире',
+                'Стань лидером банды или бизнесменом',
+                'Участвуй в обзвонах и зарабатывай авторитет',
+                'Строй свою империю на REX RP',
+                'Выбирай свой путь: полиция, мафия или бизнес'
+            ];
+            let currentPhraseIndex = 0, currentCharIndex = 0, isDeleting = false;
+            const typewriterElement = document.getElementById('typewriterText');
+            function typeWriter() {
+                const currentPhrase = phrases[currentPhraseIndex];
+                if (isDeleting) {
+                    typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex - 1);
+                    currentCharIndex--;
+                } else {
+                    typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex + 1);
+                    currentCharIndex++;
+                }
+                let speed = isDeleting ? 50 : 100;
+                if (!isDeleting && currentCharIndex === currentPhrase.length) {
+                    speed = 3000;
+                    isDeleting = true;
+                } else if (isDeleting && currentCharIndex === 0) {
+                    isDeleting = false;
+                    currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+                    speed = 500;
+                }
+                setTimeout(typeWriter, speed);
+            }
+            setTimeout(typeWriter, 1000);
+
+            const glow = document.getElementById('globalGlow');
+            document.addEventListener('mousemove', function(e) {
+                glow.style.left = e.clientX + 'px';
+                glow.style.top = e.clientY + 'px';
+                glow.classList.add('active');
+            });
+            document.addEventListener('mouseleave', function() { glow.classList.remove('active'); });
+
+            const canvas = document.getElementById('particlesCanvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+            const particleCount = 80;
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+            class Particle {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.size = Math.random() * 4 + 1;
+                    this.speedX = (Math.random() - 0.5) * 0.3;
+                    this.speedY = (Math.random() - 0.5) * 0.3;
+                    this.opacity = Math.random() * 0.8 + 0.3;
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) { this.reset(); }
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(46, 204, 113, ${this.opacity})`;
+                    ctx.shadowColor = 'rgba(46, 204, 113, 0.3)';
+                    ctx.shadowBlur = 10;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+            }
+            for (let i = 0; i < particleCount; i++) { particles.push(new Particle()); }
+            function animateParticles() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => { p.update(); p.draw(); });
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
+
+            const backToTop = document.getElementById('backToTop');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) { backToTop.classList.add('visible'); }
+                else { backToTop.classList.remove('visible'); }
+            });
+            backToTop.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+            const discordModal = document.getElementById('discordModal');
+            const discordModalOpen = document.getElementById('discordModalOpen');
+            const discordModalOpen2 = document.getElementById('discordModalOpen2');
+            const discordModalClose = document.getElementById('discordModalClose');
+            function openDiscordModal() {
+                discordModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeDiscordModal() {
+                discordModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            discordModalOpen.addEventListener('click', openDiscordModal);
+            discordModalOpen2.addEventListener('click', openDiscordModal);
+            discordModalClose.addEventListener('click', closeDiscordModal);
+            discordModal.addEventListener('click', function(e) { if (e.target === this) closeDiscordModal(); });
+            document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeDiscordModal(); });
+
+            const discordModalMVD = document.getElementById('discordModalMVD');
+            const discordModalOpenMVD = document.getElementById('discordModalOpenMVD');
+            const discordModalCloseMVD = document.getElementById('discordModalCloseMVD');
+            function openDiscordModalMVD() {
+                discordModalMVD.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeDiscordModalMVD() {
+                discordModalMVD.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            discordModalOpenMVD.addEventListener('click', openDiscordModalMVD);
+            discordModalCloseMVD.addEventListener('click', closeDiscordModalMVD);
+            discordModalMVD.addEventListener('click', function(e) { if (e.target === this) closeDiscordModalMVD(); });
+            document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeDiscordModalMVD(); });
+
+            const tiktokModal = document.getElementById('tiktokModal');
+            const tiktokModalOpen = document.getElementById('tiktokModalOpen');
+            const tiktokModalClose = document.getElementById('tiktokModalClose');
+            function openTiktokModal() {
+                tiktokModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeTiktokModal() {
+                tiktokModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            tiktokModalOpen.addEventListener('click', openTiktokModal);
+            tiktokModalClose.addEventListener('click', closeTiktokModal);
+            tiktokModal.addEventListener('click', function(e) { if (e.target === this) closeTiktokModal(); });
+            document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeTiktokModal(); });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        const navbarHeight = document.querySelector('.navbar-glass').offsetHeight || 76;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            const sections = document.querySelectorAll('.anchor-offset');
+            const navLinks = document.querySelectorAll('.nav-link-custom');
+            window.addEventListener('scroll', function() {
+                let current = '';
+                const scrollPosition = window.scrollY + 120;
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollPosition >= sectionTop) current = section.getAttribute('id');
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+                });
+                const navbar = document.getElementById('mainNav');
+                if (window.scrollY > 50) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
+            });
+
+            const elements = document.querySelectorAll('.glass-card, .resource-card, .final-card, .alert-glow-danger, .alert-glow-warning');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0) scale(1)';
+                    }
+                });
+            }, { threshold: 0.05, rootMargin: '0px 0px -50px 0px' });
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(40px) scale(0.95)';
+                el.style.transition = 'all 0.8s cubic-bezier(0.23,1,0.32,1)';
+                el.style.transitionDelay = (index * 60) + 'ms';
+                observer.observe(el);
+            });
+            setTimeout(() => {
+                elements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0) scale(1)';
+                    }, index * 60 + 200);
+                });
+            }, 300);
+        });
+    </script>
 </body>
 </html>
